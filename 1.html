@@ -1,0 +1,82 @@
+---
+
+---
+
+<!DOCTYPE HTML>
+<html lang="he, iw" dir="rtl">
+
+	{% include head.html%}
+
+        <body>
+        <!--================= loader start ================-->
+        <div class="loader-holder">
+            <div class="loader-inner loader-vis">
+                <div class="loader"></div>
+            </div>
+        </div>
+        <!-- loader end -->
+        <!--================= main start ================-->
+        <div id="main">
+
+            {% include header.html %}
+
+            <!--=============== wrapper ===============-->	
+            <div id="wrapper">
+                <!--=============== content-holder ===============-->	
+                <div class="content-holder scale-bg2">
+
+                    {% include nav.html %}
+
+                    {% include hero.html %}
+
+                    <!--=============== fixed-column ===============-->	
+                    <div class="fixed-column">
+                        <!-- animation background -->
+                        <div class="bg-wrapper">
+                            <div class="bg bg-scroll"></div>
+                            <div class="overlay"></div>
+                            <div class="bg-title"><span></span></div>
+                        </div>
+                    </div>
+                    <!-- fixed-column end -->
+                    <!--=============== wrapper-inner  ===============-->
+                    <div class="wrapper-inner home-wrap">
+                        <!-- scroll page navigation -->
+
+                        {% include scroll-nav.html %}
+
+                        <!-- scroll page navigation end -->
+                        <!--=============== content ===============-->	
+                        <div class="content">
+                            
+                                {% include about.html%}
+ 
+                            <div class="section-separator"></div>
+
+                                {% include education.html%}
+
+                            <div class="section-separator"></div>
+
+                                {% include services.html%}
+
+                            <div class="section-separator"></div>
+
+                                {% include skills.html%}
+
+                            <div class="section-separator"></div>
+
+                                {% include contact.html %}
+
+                        </div>
+                        <!-- content end  -->
+                    </div>
+                    <!-- wrapper-inner end  -->
+                    <!-- ================footer ==================== -->
+                    <div class="height-emulator"></div>
+
+                        {% include footer.html%}
+
+    </body>
+
+
+</html>

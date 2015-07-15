@@ -1,0 +1,365 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@font-face {
+  font-family: 'Open Sans Hebrew';
+  src: url('my-fonts/opensanshebrew-bold-webfont.eot'); /* IE9 Compat Modes */
+  src: url('my-fonts/opensanshebrew-bold-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('my-fonts/opensanshebrew-bold-webfont.woff') format('woff'), /* Modern Browsers */
+       url('my-fonts/opensanshebrew-bold-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('my-fonts/opensanshebrew-bold-webfont.svg#8b4b25a9e6dee2304c08fefb363a9190') format('svg'); /* Legacy iOS */
+       
+  font-style:   normal;
+  font-weight:  700;
+}
+
+@font-face {
+  font-family: 'Open Sans Hebrew';
+  src: url('my-fonts/opensanshebrew-regular-webfont.eot'); /* IE9 Compat Modes */
+  src: url('my-fonts/opensanshebrew-regular-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('my-fonts/opensanshebrew-regular-webfont.woff') format('woff'), /* Modern Browsers */
+       url('my-fonts/opensanshebrew-regular-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('my-fonts/opensanshebrew-regular-webfont.svg#265e1bf8eadfa92b8d955acd546bd2c3') format('svg'); /* Legacy iOS */
+       
+  font-style:   normal;
+  font-weight:  400;
+}
+
+@font-face {
+    font-family: 'Carmela';
+    src: url('my-fonts/carmela.eot');
+    src: url('my-fonts/carmela.eot?#iefix') format('embedded-opentype'),
+         url('my-fonts/carmela.woff') format('woff'),
+         url('my-fonts/carmela.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Alef';
+    src: url('my-fonts/Alef-Bold.eot');
+    src: url('my-fonts/Alef-Bold.eot?#iefix') format('embedded-opentype'),
+         url('my-fonts/Alef-Bold.woff') format('woff'),
+         url('my-fonts/Alef-Bold.ttf') format('truetype'),
+         url('my-fonts/Alef-Bold.svg#alefbold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+@font-face {
+	font-family: 'Arimo';
+	src: url('my-fonts/Arimo.eot?') format('eot'), 
+	     url('my-fonts/Arimo.woff') format('woff'), 
+	     url('my-fonts/Arimo.ttf')  format('truetype'),
+	     url('my-fonts/Arimo.svg#Arimo') format('svg');
+}
+
+
+
+
+@font-face {
+    font-family: 'Alef';
+    src: url('my-fonts/Alef-Regular.eot');
+    src: url('my-fonts/Alef-Regular.eot?#iefix') format('embedded-opentype'),
+         url('my-fonts/Alef-Regular.woff') format('woff'),
+         url('my-fonts/Alef-Regular.ttf') format('truetype'),
+         url('my-fonts/Alef-Regular.svg#alefregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('my-fonts/icomoon.eot?-y80cxl');
+	src:url('my-fonts/icomoon.eot?#iefix-y80cxl') format('embedded-opentype'),
+		url('my-fonts/icomoon.ttf?-y80cxl') format('truetype'),
+		url('my-fonts/icomoon.woff?-y80cxl') format('woff'),
+		url('my-fonts/icomoon.svg?-y80cxl#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-mouse:before {
+	content: "\e602";
+}
+
+.icon-align-right:before {
+	content: "\e029";
+}
+.icon-phone-outline:before {
+	content: "\e600";
+}
+.icon-phone:before {
+	content: "\e601";
+}
+
+.icon-mail:before {
+	content: "\e002";
+}
+.icon-link:before {
+	content: "\e005";
+}
+.icon-clock:before {
+	content: "\e014";
+}
+.icon-align-right:before {
+	content: "\e029";
+}
+.icon-location:before {
+	content: "\e070";
+}
+.icon-head:before {
+	content: "\e074";
+}
+
+
+
+
+
+body {
+	font-family: Alef, 'icomoon' ;
+}
+
+p {
+	font-family: Arimo;
+	font-size: 0.9rem;
+}
+
+
+
+.section-title h3 {
+	color:white;
+}
+
+.contact {
+    
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    font-family: FontAwesome;
+}
+
+.contact input , .contact textarea {
+	color:#03cc85;
+	margin-bottom: 5px;
+	font-size: 18px;
+
+}
+
+.contact .btn {
+	background: #03bb7a;
+	border-color: #03cc85;
+	font-size: 26px;
+	border:5px;
+	margin-bottom: 21px;
+}
+
+#contact-form input[type="submit"] {
+	color: white;
+}
+
+.to-top {
+
+  float: right;
+}
+
+.to-top-holder p{
+	text-align: left;
+	margin-left: 5px;
+}
+
+.to-top-holder p:before, .to-top-holder p:after {
+	position: absolute;
+	left:0px;
+}
+
+
+
+@media only screen and  (max-width: 1036px) {
+
+	.logo-holder {
+	  float: left;
+	  max-width: 100px;
+	  height: 70px;
+	  position: relative;
+	  padding: 0 10px;
+	  line-height: 70px;
+	}
+
+	.nav-button {
+	  position: absolute;
+	  top: 25px;
+	  right: 16px;
+	  z-index: 21;
+	  width: 30px;
+	  height: 40px;
+	  line-height: 40px;
+	  cursor: pointer;
+	  font-size: 24px;
+	}
+}
+
+.section-title {
+	margin:5px;
+}
+
+.servcie {
+	height: 100px;
+	width: 100px;
+}
+
+.logo-holder .respimg {
+  width: auto;
+  height: 100%;
+  padding: 10px;
+ }
+.nav-inner nav li a {
+	font-size: 45px;
+}
+
+.scroll-nav li a {
+	font-size: 16px;
+
+}
+
+.scroll-nav li a.act-link {
+	color:white;
+}
+
+#mail {
+	font-size:0.9rem;
+}
+
+.spacer {
+margin-top: 5px;
+}
+
+.services-box-info h3 {
+	font-size: 1.25rem;
+	color: #003B8C;
+	font-weight: bold;
+}
+
+.services-box-info p {
+	font-size: 0.9rem;
+
+}
+
+/*=========loader==============*/
+@for $i from 1 through 6 {
+	@keyframes preload-show-#{$i}{
+		from{
+			transform: rotateZ(60* $i + deg) rotateY(-90deg) rotateX(0deg);
+			border-left-color: #9c2f2f;
+		}
+	}
+	@keyframes preload-hide-#{$i}{
+		to{
+			transform: rotateZ(60* $i + deg) rotateY(-90deg) rotateX(0deg);
+			border-left-color: #9c2f2f;
+		}
+	}
+
+	@keyframes preload-cycle-#{$i}{
+		
+		$startIndex: $i*5;
+		$reverseIndex: (80 - $i*5);
+
+		#{$startIndex * 1%}{
+			transform: rotateZ(60* $i + deg) rotateY(90deg) rotateX(0deg);
+			border-left-color: #9c2f2f;
+		}
+		#{$startIndex + 5%},
+		#{$reverseIndex * 1%}{
+			transform: rotateZ(60* $i + deg) rotateY(0) rotateX(0deg);
+			border-left-color: #f7484e;
+		}
+
+		#{$reverseIndex + 5%},
+		100%{
+			transform: rotateZ(60* $i + deg) rotateY(90deg) rotateX(0deg);
+			border-left-color: #9c2f2f;
+		}
+	}
+}
+
+@keyframes preload-flip{
+	0%{
+		transform: rotateY(0deg) rotateZ(-60deg);
+	}
+	100%{
+		transform: rotateY(360deg) rotateZ(-60deg);
+	}
+}
+
+
+.preloader{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+	font-size: 20px;
+	display: block;
+	width: 3.75em;
+	height: 4.25em;
+	margin-left: -1.875em;
+  margin-top: -2.125em;
+	transform-origin: center center;
+	transform: rotateY(180deg) rotateZ(-60deg);
+
+	.slice{
+		border-top: 1.125em solid transparent;
+		border-right: none;
+		border-bottom: 1em solid transparent;
+		border-left: 1.875em solid #f7484e;
+		position: absolute;
+		top: 0px;
+		left: 50%;
+		transform-origin: left bottom;
+		border-radius: 3px 3px 0 0;
+	}
+
+	@for $i from 1 through 6 {
+	  .slice:nth-child(#{$i}) { 
+	  	transform: rotateZ(60* $i + deg) rotateY(0deg) rotateX(0);
+	  	animation: .15s linear .9 - $i*.08s preload-hide-#{$i} both 1;
+	  }
+	}
+
+
+	&.loading{
+		animation: 2s preload-flip steps(2) infinite both;
+		@for $i from 1 through 6 {
+		  .slice:nth-child(#{$i}) { 
+		  	transform: rotateZ(60* $i + deg) rotateY(90deg) rotateX(0);
+		  	animation: 2s preload-cycle-#{$i} linear infinite both;
+		  }
+		}
+	}
+
+}
+
+#servicesMoInfo {
+	margin-bottom:100px;
+}
+
+.btn.hide-icon span {
+	font-size:1rem;
+	cursor: pointer;
+}
