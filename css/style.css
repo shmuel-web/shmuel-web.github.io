@@ -2816,6 +2816,9 @@ footer {
 .post-meta li {
 	margin-bottom:10px;
 }
+.accordion-title a {
+	font-size: 1.1rem;
+}
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
 .bg {
