@@ -689,14 +689,14 @@ header {
 	position:relative;
 	font-size:94px;
 	text-align:right;
-	font-family: arial;
+	font-family: Arimo;
 	font-weight: bold;
 
 
 }
 .hero-title h4 {
 	float:right;
-	font-family: arial;
+	font-family: Arimo;
 	font-size:2rem;
 	text-transform:uppercase;
 	text-align:right;
@@ -1127,6 +1127,7 @@ header {
 	padding-left:30px;
 	list-style: none;
 }
+
 
 /* --------- services --------------------------------------*/
 .col-resize:hover {
@@ -2817,7 +2818,10 @@ footer {
 	margin-bottom:10px;
 }
 .accordion-title a {
-	font-size: 1.1rem;
+	font-size: 1.2rem;
+}
+.accordion-title a:hover {
+	padding-right: 5px;	
 }
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {

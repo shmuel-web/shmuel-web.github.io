@@ -27,7 +27,7 @@
 .fw-title {
 	border-bottom:4px solid #006AFF;
 }
-.hero-wrap {#003B8C
+.hero-wrap {
 	border-right:4px solid #006AFF;
 }
 .halig-right .hero-wrap {
@@ -41,6 +41,7 @@
 .scroll-nav li a.act-link {
 	color:#006AFF;
 }
+}
 .hero-title h4:before {
 	background:#006AFF;
 }
@@ -51,10 +52,14 @@
 }
 
 .logo-holder   {
-	background-color: #006AFF;
+	background-color: #191919;
 }
 
 body::-webkit-scrollbar-thumb {
   background-color: #006AFF;
   outline: 1px solid #003B8C;
 }
+.accordion .accordion-inner ul li i {
+	color: #006AFF;
+}
+
