@@ -486,4 +486,8 @@ p {
   cursor: pointer;
 }
 
+.slide {
+  display: none;
+}
+
 /*# sourceMappingURL=main.css.map */

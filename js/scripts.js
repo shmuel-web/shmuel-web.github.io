@@ -112,9 +112,6 @@ function initBionick() {
     var sc = $(".services-carusel");
     sc.owlCarousel({
         rtl:true,
-        autoPlay: true,
-        autoplayTimeout: 5000,
-        
         loop:true,
         items: 3,
         nav: false,
@@ -145,6 +142,7 @@ function initBionick() {
     });
     $(".ser-carous-holder a.next-slide").on("click", function() {
         $(this).closest(".ser-carous-holder").find(sc).trigger("next.owl.carousel");
+        
             $('html, body').animate({scrollTop: ($("#carousel-nav").offset().top)-90
     },{
         queue: false,
