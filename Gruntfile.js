@@ -48,11 +48,12 @@ module.exports = function(grunt) {
 
     uglify: {
       options: {
-        sourceMap: true
+        sourceMap: true,
+        mangle: false
       },
       build: {
         files: {
-          'js/global.min.js': ['js/jquery.min.js','js/plugins.js','js/owl.js','js/script.js','js/my.js'],
+          'js/global.min.js': ['js/plugins.js','js/owl.js','js/script.js','js/my.js'],
         }
       }
     },
@@ -78,7 +79,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
 
   // Default task(s).
-  grunt.registerTask('default', ['concat','sass','cssmin']);
+  grunt.registerTask('default', ['uglify','sass','cssmin']);
   
 
 };

@@ -435,3 +435,7 @@ $contactForm.submit(function(e) {
 	});
 	
 };*/
+
+$( ".carouselColapse" ).click(function() {
+  $( this ).prev(".slide").slideToggle(500);
+});
