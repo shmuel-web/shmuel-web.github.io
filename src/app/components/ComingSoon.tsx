@@ -25,20 +25,20 @@ export default function ComingSoon() {
       <p className="mt-2 text-sm sm:text-base text-foreground/80">
         I'm building this section of the blog. Check back shortly.
       </p>
-      <div className="mt-4 inline-flex items-center justify-center gap-4 font-mono text-sm sm:text-base" aria-live="polite">
-        <div className="min-w-16">
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:gap-4 font-mono text-sm sm:text-base" aria-live="polite">
+        <div className="min-w-14 sm:min-w-16">
           <div className="text-2xl font-semibold tabular-nums">{days}</div>
           <div className="text-foreground/70">days</div>
         </div>
-        <div className="min-w-16">
+        <div className="min-w-14 sm:min-w-16">
           <div className="text-2xl font-semibold tabular-nums">{hours.toString().padStart(2, "0")}</div>
           <div className="text-foreground/70">hours</div>
         </div>
-        <div className="min-w-16">
+        <div className="min-w-14 sm:min-w-16">
           <div className="text-2xl font-semibold tabular-nums">{minutes.toString().padStart(2, "0")}</div>
           <div className="text-foreground/70">minutes</div>
         </div>
-        <div className="min-w-16">
+        <div className="min-w-14 sm:min-w-16">
           <div className="text-2xl font-semibold tabular-nums">{seconds.toString().padStart(2, "0")}</div>
           <div className="text-foreground/70">seconds</div>
         </div>
