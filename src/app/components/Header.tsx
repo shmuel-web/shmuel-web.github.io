@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useI18n } from "@/i18n/I18nProvider";
 
 function NavLink({ href, label }: { href: string; label: string }) {
   const pathname = usePathname();
@@ -21,16 +22,17 @@ function NavLink({ href, label }: { href: string; label: string }) {
 }
 
 export default function Header() {
+  const { locale, dict } = useI18n();
   return (
     <header className="sticky top-0 z-10 backdrop-blur supports-[backdrop-filter]:bg-background/70 border-b border-black/[.08] dark:border-white/[.145]">
       <div className="max-w-2xl mx-auto w-full px-8 sm:px-12 h-14 flex items-center justify-between">
-        <Link href="/" className="font-semibold tracking-tight">
-          My Blog
+        <Link href={`/${locale}`} className="font-semibold tracking-tight">
+          {dict.siteTitle}
         </Link>
         <nav className="flex items-center gap-3 text-sm sm:text-base">
-          <NavLink href="/about" label="About" />
-          <NavLink href="/work" label="Work" />
-          <NavLink href="/blog" label="Blog" />
+          <NavLink href={`/${locale}/about`} label={dict.nav.about} />
+          <NavLink href={`/${locale}/work`} label={dict.nav.work} />
+          <NavLink href={`/${locale}/blog`} label={dict.nav.blog} />
         </nav>
       </div>
     </header>

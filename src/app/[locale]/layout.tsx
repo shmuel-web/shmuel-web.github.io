@@ -1,0 +1,25 @@
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import { I18nProvider } from "@/i18n/I18nProvider";
+import { getDictionary } from "@/i18n/getDictionary";
+import type { Locale } from "@/i18n/locales";
+
+export default async function LocaleLayout({
+  children,
+  params,
+}: Readonly<{
+  children: React.ReactNode;
+  params: { locale: Locale };
+}>) {
+  const dict = await getDictionary(params.locale);
+
+  return (
+    <I18nProvider value={{ locale: params.locale, dict }}>
+      <div className="min-h-screen grid grid-rows-[auto_1fr_auto]" dir={params.locale === "he" ? "rtl" : "ltr"}>
+        <Header />
+        <div>{children}</div>
+        <Footer />
+      </div>
+    </I18nProvider>
+  );
+}
