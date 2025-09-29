@@ -1,0 +1,8 @@
+---
+description: mobile first
+globs:
+alwaysApply: true
+---
+
+every ui component and elment should be styled to look goos on mobile screens first
+only after that and only when necessery add breakpoint to support bigger screens
