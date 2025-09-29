@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 
 export default function ComingSoon() {
-  const targetDate = useMemo(() => new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), []);
+  // Fixed target: 14/10/25 11:59:13 (DD/MM/YY HH:mm:ss). Months are 0-based → 9 = October.
+  const targetDate = useMemo(() => new Date(2025, 9, 14, 11, 59, 13), []);
   const [now, setNow] = useState<Date>(new Date());
 
   useEffect(() => {
@@ -43,7 +44,7 @@ export default function ComingSoon() {
         </div>
       </div>
       <div className="mt-3 text-xs text-foreground/60">
-        Launching on {targetDate.toLocaleDateString()} at {targetDate.toLocaleTimeString()}
+        Launching on 14/10/25 11:59:13
       </div>
     </div>
   );

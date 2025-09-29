@@ -28,7 +28,6 @@ export default function Header() {
           My Blog
         </Link>
         <nav className="flex items-center gap-3 text-sm sm:text-base">
-          <NavLink href="/" label="Home" />
           <NavLink href="/about" label="About" />
           <NavLink href="/work" label="Work" />
           <NavLink href="/blog" label="Blog" />
