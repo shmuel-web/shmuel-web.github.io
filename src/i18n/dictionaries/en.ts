@@ -21,6 +21,17 @@ export default {
     title: "Work",
     description: "A collection of my work and projects.",
   },
+  comingSoon: {
+    title: "Coming Soon",
+    description: "I'm building this section of the blog. Check back shortly.",
+    units: {
+      days: "days",
+      hours: "hours",
+      minutes: "minutes",
+      seconds: "seconds",
+    },
+    launchOn: "Launching on",
+  },
   footer: {
     linkedIn: "LinkedIn",
     twitter: "Twitter",

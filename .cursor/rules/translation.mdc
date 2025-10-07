@@ -1,0 +1,7 @@
+---
+description: translation
+globs:
+alwaysApply: true
+---
+
+every UI element and text should support hebrew and english

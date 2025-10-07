@@ -21,6 +21,17 @@ export default {
     title: "עבודות",
     description: "אוסף של עבודות ופרויקטים שלי.",
   },
+  comingSoon: {
+    title: "בקרוב",
+    description: "אני בונה את החלק הזה של הבלוג. חזרו בקרוב.",
+    units: {
+      days: "ימים",
+      hours: "שעות",
+      minutes: "דקות",
+      seconds: "שניות",
+    },
+    launchOn: "תאריך השקה",
+  },
   footer: {
     linkedIn: "לינקדאין",
     twitter: "טוויטר",

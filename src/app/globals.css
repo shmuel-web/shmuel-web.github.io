@@ -3,6 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --border-color: rgba(0,0,0,0.08);
+  --hover-bg: rgba(0,0,0,0.04);
 }
 
 @theme inline {
@@ -16,7 +18,24 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --border-color: rgba(255,255,255,0.145);
+    --hover-bg: rgba(255,255,255,0.06);
   }
+}
+
+/* Explicit overrides when user selects theme */
+[data-theme="light"] {
+  --background: #ffffff;
+  --foreground: #171717;
+  --border-color: rgba(0,0,0,0.08);
+  --hover-bg: rgba(0,0,0,0.04);
+}
+
+[data-theme="dark"] {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --border-color: rgba(255,255,255,0.145);
+  --hover-bg: rgba(255,255,255,0.06);
 }
 
 body {

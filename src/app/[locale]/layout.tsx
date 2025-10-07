@@ -9,13 +9,14 @@ export default async function LocaleLayout({
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: Locale };
+  params: Promise<{ locale: Locale }>;
 }>) {
-  const dict = await getDictionary(params.locale);
+  const { locale } = await params;
+  const dict = await getDictionary(locale);
 
   return (
-    <I18nProvider value={{ locale: params.locale, dict }}>
-      <div className="min-h-screen grid grid-rows-[auto_1fr_auto]" dir={params.locale === "he" ? "rtl" : "ltr"}>
+    <I18nProvider value={{ locale, dict }}>
+      <div className="min-h-screen grid grid-rows-[auto_1fr_auto]" dir={locale === "he" ? "rtl" : "ltr"}>
         <Header />
         <div>{children}</div>
         <Footer />

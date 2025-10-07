@@ -12,7 +12,7 @@ function NavLink({ href, label }: { href: string; label: string }) {
     <Link
       href={href}
       className={
-        "px-2 py-1 rounded hover:bg-black/[.04] dark:hover:bg-white/[.06]" +
+        "px-2 py-1 rounded hover:bg-[var(--hover-bg)]" +
         (isActive ? " underline underline-offset-4" : "")
       }
     >
@@ -24,7 +24,7 @@ function NavLink({ href, label }: { href: string; label: string }) {
 export default function Header() {
   const { locale, dict } = useI18n();
   return (
-    <header className="sticky top-0 z-10 backdrop-blur supports-[backdrop-filter]:bg-background/70 border-b border-black/[.08] dark:border-white/[.145]">
+    <header className="sticky top-0 z-10 backdrop-blur supports-[backdrop-filter]:bg-background/70 border-b border-[var(--border-color)]">
       <div className="max-w-2xl mx-auto w-full px-8 sm:px-12 h-14 flex items-center justify-between">
         <Link href={`/${locale}`} className="font-semibold tracking-tight">
           {dict.siteTitle}
