@@ -23,25 +23,23 @@ export default function SvgAnimation() {
   const bottomRightY = centerY + height / 2;
 
   return (
-    <div className="w-full flex justify-center items-center py-8 sm:py-12">
+    <div className="w-full">
       <svg
-        width="200"
-        height="200"
         viewBox="0 0 200 200"
-        className="w-32 h-32 sm:w-48 sm:h-48"
+        className="w-full h-auto max-h-[200px]"
         xmlns="http://www.w3.org/2000/svg"
       >
         {/* Group containing triangle and circles for rotation */}
         <g>
           {/* Dashed triangle */}
-          <polygon
+          {/* <polygon
             points={`${topX},${topY} ${bottomLeftX},${bottomLeftY} ${bottomRightX},${bottomRightY}`}
             fill="none"
             stroke="currentColor"
             strokeWidth="1"
             strokeDasharray="5,5"
             className="text-foreground/60"
-          />
+          /> */}
           
           {/* Red circle at top point */}
           <circle
@@ -49,7 +47,7 @@ export default function SvgAnimation() {
             cy={topY}
             r="1"
             fill="red"
-            fillOpacity="0.75"
+            fillOpacity="0.63"
           >
             <animate
               attributeName="r"
@@ -70,7 +68,7 @@ export default function SvgAnimation() {
             cy={bottomLeftY}
             r="1"
             fill="yellow"
-            fillOpacity="0.75"
+            fillOpacity="0.63"
           >
             <animate
               attributeName="r"
@@ -91,7 +89,7 @@ export default function SvgAnimation() {
             cy={bottomRightY}
             r="1"
             fill="blue"
-            fillOpacity="0.75"
+            fillOpacity="0.63"
           >
             <animate
               attributeName="r"
