@@ -39,5 +39,11 @@ export default {
     language: "Language",
     english: "English",
     hebrew: "Hebrew",
+    theme: {
+      label: "Theme",
+      dark: "Dark",
+      light: "Light",
+      system: "Auto",
+    },
   },
 } as const;

@@ -39,5 +39,11 @@ export default {
     language: "שפה",
     english: "אנגלית",
     hebrew: "עברית",
+    theme: {
+      label: "ערכת נושא",
+      dark: "כהה",
+      light: "בהיר",
+      system: "אוטומטי",
+    },
   },
 } as const;

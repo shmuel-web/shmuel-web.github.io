@@ -43,3 +43,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+/* Footer tweaks: mobile-first spacing and button targets */
+footer a, footer button {
+  touch-action: manipulation;
+}
