@@ -26,7 +26,8 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-10 backdrop-blur supports-[backdrop-filter]:bg-background/70 border-b border-[var(--border-color)]">
       <div className="max-w-2xl mx-auto w-full px-8 sm:px-12 h-14 flex items-center justify-between">
-        <Link href={`/${locale}`} className="font-semibold tracking-tight">
+        <Link href={`/${locale}`} className="font-semibold tracking-tight flex items-center gap-2">
+          <img src="/logo.svg" alt="Logo" className="h-5 w-5" />
           {dict.siteTitle}
         </Link>
         <nav className="flex items-center gap-3 text-sm sm:text-base">

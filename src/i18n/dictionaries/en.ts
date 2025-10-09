@@ -1,5 +1,10 @@
 export default {
-  siteTitle: "My Blog",
+  siteTitle: "Between Worlds",
+  svgAnimation: {
+    top: "Torah",
+    left: "Science",
+    right: "Society",
+  },
   nav: {
     about: "About",
     work: "Work",

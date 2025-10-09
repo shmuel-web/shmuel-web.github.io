@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="title">
+  <title id="title">Three-circle logo</title>
+  <!-- Static logo derived from the final state of SvgAnimation -->
+  <!-- Geometry constants: base=63, height=(base*sqrt(3))/2 ≈ 54.56, center=(100,100) -->
+  <!-- Top circle -->
+  <circle cx="100" cy="72.7202" r="63" fill="red" fill-opacity="0.72" />
+  <!-- Bottom-left circle -->
+  <circle cx="68.5" cy="127.2798" r="63" fill="yellow" fill-opacity="0.72" />
+  <!-- Bottom-right circle -->
+  <circle cx="131.5" cy="127.2798" r="63" fill="blue" fill-opacity="0.72" />
+</svg>
+

@@ -1,5 +1,10 @@
 export default {
-  siteTitle: "הבלוג שלי",
+  siteTitle: "בין העולמות",
+  svgAnimation: {
+    top: "תורה",
+    left: "מדע",
+    right: "חברה",
+  },
   nav: {
     about: "אודות",
     work: "עבודות",
