@@ -33,6 +33,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Copy Hebrew to root
+        run: cp -f out/he/index.html out/index.html
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 

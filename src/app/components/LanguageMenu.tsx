@@ -52,11 +52,21 @@ export default function LanguageMenu() {
       </button>
       {open && (
         <div className="absolute z-20 right-0 bottom-full mb-2 min-w-32 rounded-md border border-[var(--border-color)] bg-[var(--background)] p-1 shadow-md" role="menu">
-          <Link href={target} onClick={() => setOpen(false)} className="block w-full text-start rounded px-3 py-2 text-sm hover:bg-[var(--hover-bg)]">
+          <Link 
+            href={target} 
+            onClick={() => {
+              // Save user preference to localStorage
+              localStorage.setItem('preferredLocale', otherLocale);
+              setOpen(false);
+            }} 
+            className="block w-full text-start rounded px-3 py-2 text-sm hover:bg-[var(--hover-bg)]"
+          >
             {otherLocale === "en" ? dict.footer.english : dict.footer.hebrew}
+            <span className="text-xs text-foreground/60 ml-1">(Set as default)</span>
           </Link>
           <button disabled className="block w-full text-start rounded px-3 py-2 text-sm opacity-60">
             {locale === "en" ? dict.footer.english : dict.footer.hebrew}
+            <span className="text-xs text-foreground/60 ml-1">(Current)</span>
           </button>
         </div>
       )}

@@ -47,8 +47,10 @@
     </div>
     
     <script>
-        // Immediate redirect to Hebrew version
-        window.location.replace('/he/');
+        // Check for saved preference, default to Hebrew
+        const pref = localStorage.getItem('preferredLocale');
+        const target = pref || 'he';
+        window.location.replace('/' + target + '/');
     </script>
 </body>
 </html>
