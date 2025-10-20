@@ -4,6 +4,10 @@ import { I18nProvider } from "@/i18n/I18nProvider";
 import { getDictionary } from "@/i18n/getDictionary";
 import type { Locale } from "@/i18n/locales";
 
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "he" }];
+}
+
 export default async function LocaleLayout({
   children,
   params,
