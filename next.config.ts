@@ -5,14 +5,6 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/',
-        destination: '/he/'
-      }
-    ];
   }
 };
 

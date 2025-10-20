@@ -11,6 +11,11 @@ export default function LanguageMenu() {
   const { locale, dict } = useI18n();
   const pathname = usePathname();
   const otherLocale = locale === "en" ? "he" : "en";
+  const [savedLocale, setSavedLocale] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSavedLocale(localStorage.getItem('preferredLocale'));
+  }, []);
 
   const target = (() => {
     const parts = pathname.split("/").filter(Boolean);
@@ -51,22 +56,31 @@ export default function LanguageMenu() {
         <Icon path={mdiTranslate} size={1} />
       </button>
       {open && (
-        <div className="absolute z-20 right-0 bottom-full mb-2 min-w-32 rounded-md border border-[var(--border-color)] bg-[var(--background)] p-1 shadow-md" role="menu">
+        <div className={`absolute z-20 ${locale === "he" ? "left-0" : "right-0"} bottom-full mb-2 min-w-40 rounded-md border border-[var(--border-color)] bg-[var(--background)] p-1 shadow-md`} role="menu">
           <Link 
             href={target} 
             onClick={() => {
               // Save user preference to localStorage
               localStorage.setItem('preferredLocale', otherLocale);
+              setSavedLocale(otherLocale);
               setOpen(false);
             }} 
             className="block w-full text-start rounded px-3 py-2 text-sm hover:bg-[var(--hover-bg)]"
           >
-            {otherLocale === "en" ? dict.footer.english : dict.footer.hebrew}
-            <span className="text-xs text-foreground/60 ml-1">(Set as default)</span>
+            <span>{otherLocale === "en" ? "English" : "עברית"}</span>
+            {savedLocale === otherLocale && (
+              <span className={`text-xs text-foreground/60 ${locale === "he" ? "mr-2" : "ml-2"}`}>
+                ({dict.footer.default})
+              </span>
+            )}
           </Link>
           <button disabled className="block w-full text-start rounded px-3 py-2 text-sm opacity-60">
-            {locale === "en" ? dict.footer.english : dict.footer.hebrew}
-            <span className="text-xs text-foreground/60 ml-1">(Current)</span>
+            <span>{locale === "en" ? "English" : "עברית"}</span>
+            {savedLocale === locale && (
+              <span className={`text-xs text-foreground/60 ${locale === "he" ? "mr-2" : "ml-2"}`}>
+                ({dict.footer.default})
+              </span>
+            )}
           </button>
         </div>
       )}

@@ -44,6 +44,7 @@ export default {
     language: "Language",
     english: "English",
     hebrew: "Hebrew",
+    default: "Default",
     theme: {
       label: "Theme",
       dark: "Dark",
