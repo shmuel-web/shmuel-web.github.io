@@ -135,3 +135,4 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 2. Navigate to "Domains" section
 3. Add your custom domain
 4. Configure DNS records as instructed by Vercel
+# Trigger deployment
