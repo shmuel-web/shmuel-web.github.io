@@ -1,15 +1,35 @@
-"use client";
+import Link from "next/link";
+import { listPostsForLocale } from "@/lib/markdown";
 
-import ComingSoon from "@/app/components/ComingSoon";
-import { useI18n } from "@/i18n/I18nProvider";
+export const dynamicParams = false;
 
-export default function BlogPage() {
-  const { dict } = useI18n();
-  return (
-    <main className="max-w-2xl mx-auto w-full p-8 sm:p-12">
-      <h1 className="text-3xl sm:text-4xl font-bold">{dict.blog.title}</h1>
-      <p className="mt-3 text-foreground/80">{dict.blog.description}</p>
-      <ComingSoon />
-    </main>
-  );
+export async function generateStaticParams() {
+	return (["en", "he"] as const).map((locale) => ({ locale }));
+}
+
+export default async function BlogIndex({ params }: { params: Promise<{ locale: "en" | "he" }> }) {
+	const { locale } = await params;
+	const posts = listPostsForLocale(locale)
+		.filter((p) => !(p.frontmatter.draft === true))
+		.sort((a, b) => +new Date(b.frontmatter.date) - +new Date(a.frontmatter.date));
+	return (
+		<main className="max-w-screen-sm mx-auto w-full px-4 sm:px-6 md:px-8 py-8">
+			<h1 className="text-2xl sm:text-3xl font-bold">{locale === "he" ? "בלוג" : "Blog"}</h1>
+			<ul className="mt-6 space-y-6">
+				{posts.map((p) => (
+					<li key={`${p.post_number}-${locale}`} className="border-b pb-4">
+						<Link href={`/${locale}/blog/${p.post_number}`} className="text-base sm:text-lg font-medium">
+							{p.frontmatter.title}
+						</Link>
+						<div className="text-xs opacity-70 mt-1">
+							{new Date(p.frontmatter.date).toLocaleDateString(locale)}
+						</div>
+						{p.frontmatter.summary && (
+							<p className="text-sm mt-2">{p.frontmatter.summary}</p>
+						)}
+					</li>
+				))}
+			</ul>
+		</main>
+	);
 }
