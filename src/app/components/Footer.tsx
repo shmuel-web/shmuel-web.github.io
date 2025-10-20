@@ -34,7 +34,7 @@ export default function Footer() {
 
           <div className="inline-flex items-center gap-5">
           <a
-            href="https://www.linkedin.com/"
+            href="https://www.linkedin.com/in/shmuel-disraeli/"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded p-1 hover:bg-[var(--hover-bg)]"
