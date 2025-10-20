@@ -56,25 +56,25 @@ export type ParsedPost = {
 	html: string;
 };
 
-export async function getPost(locale: Locale, postNumber: string): Promise<ParsedPost | null> {
-	const filePath = path.join(CONTENT_ROOT, postNumber, `${locale}.md`);
-	if (!fs.existsSync(filePath)) return null;
-	const raw = fs.readFileSync(filePath, "utf8");
-	const { data, content } = matter(raw);
-	const html = await renderMarkdownToHtml(content);
-	return { frontmatter: data as Frontmatter, html };
+export async function getPost(locale: string, postNumber: string): Promise<ParsedPost | null> {
+  const filePath = path.join(CONTENT_ROOT, postNumber, `${locale}.md`);
+  if (!fs.existsSync(filePath)) return null;
+  const raw = fs.readFileSync(filePath, "utf8");
+  const { data, content } = matter(raw);
+  const html = await renderMarkdownToHtml(content);
+  return { frontmatter: data as Frontmatter, html };
 }
 
-export function listPostsForLocale(locale: Locale): Array<{ post_number: string; frontmatter: Frontmatter }>{
-	return listPostNumbers()
-		.map((id) => {
-			const filePath = path.join(CONTENT_ROOT, id, `${locale}.md`);
-			if (!fs.existsSync(filePath)) return null;
-			const raw = fs.readFileSync(filePath, "utf8");
-			const { data } = matter(raw);
-			return { post_number: id, frontmatter: data as Frontmatter };
-		})
-		.filter(Boolean) as Array<{ post_number: string; frontmatter: Frontmatter }>;
+export function listPostsForLocale(locale: string): Array<{ post_number: string; frontmatter: Frontmatter }>{
+  return listPostNumbers()
+    .map((id) => {
+      const filePath = path.join(CONTENT_ROOT, id, `${locale}.md`);
+      if (!fs.existsSync(filePath)) return null;
+      const raw = fs.readFileSync(filePath, "utf8");
+      const { data } = matter(raw);
+      return { post_number: id, frontmatter: data as Frontmatter };
+    })
+    .filter(Boolean) as Array<{ post_number: string; frontmatter: Frontmatter }>;
 }
 
 

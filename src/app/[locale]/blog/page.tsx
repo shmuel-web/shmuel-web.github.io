@@ -7,8 +7,8 @@ export async function generateStaticParams() {
 	return (["en", "he"] as const).map((locale) => ({ locale }));
 }
 
-export default async function BlogIndex({ params }: { params: Promise<{ locale: "en" | "he" }> }) {
-	const { locale } = await params;
+export default async function BlogIndex({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
 	const posts = listPostsForLocale(locale)
 		.filter((p) => !(p.frontmatter.draft === true))
 		.sort((a, b) => +new Date(b.frontmatter.date) - +new Date(a.frontmatter.date));

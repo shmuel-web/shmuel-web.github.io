@@ -2,10 +2,9 @@
 
 import React, { createContext, useContext } from "react";
 import type { Dictionary } from "./getDictionary";
-import type { Locale } from "./locales";
 
 type I18nContextValue = {
-  locale: Locale;
+  locale: string;
   dict: Dictionary;
 };
 

@@ -14,8 +14,8 @@ export async function generateStaticParams() {
 	return params;
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: "en" | "he"; post_number: string }> }): Promise<Metadata> {
-	const { locale, post_number } = await params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; post_number: string }> }): Promise<Metadata> {
+  const { locale, post_number } = await params;
 	const post = await getPost(locale, post_number);
 	if (!post) return {};
 	const alternates = {
@@ -37,8 +37,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: "
 	};
 }
 
-export default async function BlogPostPage({ params }: { params: Promise<{ locale: "en" | "he"; post_number: string }> }) {
-	const { locale, post_number } = await params;
+export default async function BlogPostPage({ params }: { params: Promise<{ locale: string; post_number: string }> }) {
+  const { locale, post_number } = await params;
 	const post = await getPost(locale, post_number);
 	if (!post) notFound();
 	return (
@@ -47,7 +47,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ local
 			<p className="text-xs sm:text-sm opacity-70 mt-2">
 				{new Date(post.frontmatter.date).toLocaleDateString(locale)}
 			</p>
-			{/* eslint-disable-next-line react/no-danger */}
 			<div className="prose dark:prose-invert mt-6" dangerouslySetInnerHTML={{ __html: post.html }} />
 		</article>
 	);

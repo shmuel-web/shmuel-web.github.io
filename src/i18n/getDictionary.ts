@@ -1,10 +1,9 @@
-import type { Locale } from "./locales";
 import en from "./dictionaries/en";
 import he from "./dictionaries/he";
 
-export type Dictionary = typeof en;
+export type Dictionary = typeof en | typeof he;
 
-export async function getDictionary(locale: Locale): Promise<Dictionary> {
+export async function getDictionary(locale: string): Promise<Dictionary> {
   switch (locale) {
     case "he":
       return he;
