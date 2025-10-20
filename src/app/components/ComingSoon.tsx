@@ -5,8 +5,8 @@ import { useI18n } from "@/i18n/I18nProvider";
 
 export default function ComingSoon() {
   const { locale, dict } = useI18n();
-  // Fixed target: 14/10/25 11:59:13 (DD/MM/YY HH:mm:ss). Months are 0-based → 9 = October.
-  const targetDate = useMemo(() => new Date(2025, 9, 14, 11, 59, 13), []);
+  // Fixed target: 31/03/25 23:59:59 (DD/MM/YY HH:mm:ss). Months are 0-based → 2 = March.
+  const targetDate = useMemo(() => new Date(2025, 2, 31, 23, 59, 59), []);
   const [now, setNow] = useState<Date>(new Date());
 
   useEffect(() => {
