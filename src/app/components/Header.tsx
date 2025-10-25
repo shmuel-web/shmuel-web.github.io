@@ -53,8 +53,8 @@ function MobileMenuButton({ isOpen, onClick }: { isOpen: boolean; onClick: () =>
           }`}
         />
         <span
-          className={`block w-5 h-0.5 bg-current transition-all duration-300 mt-1 ${
-            isOpen ? "-rotate-45 -translate-y-1.5" : ""
+          className={`block w-5 h-0.5 bg-current transition-all duration-300  ${
+            isOpen ? "-rotate-45 -translate-y-1.5" : "mt-1"
           }`}
         />
       </div>
