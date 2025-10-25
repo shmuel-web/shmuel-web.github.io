@@ -13,10 +13,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Between Worlds • בין העולמות",
-  description: "Essays at the intersection of Torah, science, and society. / מאמרים על כל מה שבין תורה, מדע וחברה.",
+  title: "בין העולמות • Between Worlds",
+  description: "מאמרים על כל מה שבין תורה, מדע וחברה. / Essays at the intersection of Torah, science, and society.",
   icons: {
     icon: "/logo.svg",
+  },
+  alternates: {
+    languages: {
+      'he': '/he/',
+      'en': '/en/',
+      'x-default': '/'
+    }
   },
 };
 

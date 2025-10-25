@@ -1,6 +1,5 @@
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import LanguageRedirect from "../components/LanguageRedirect";
 import { I18nProvider } from "@/i18n/I18nProvider";
 import { getDictionary } from "@/i18n/getDictionary";
 import type { Locale } from "@/i18n/locales";
@@ -19,7 +18,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         'en': '/en/',
         'x-default': '/he/'
       }
-    }
+    },
+    title: locale === 'he' ? 'בלוג שלי' : 'My Blog'
   };
 }
 
@@ -35,7 +35,6 @@ export default async function LocaleLayout({
 
   return (
     <I18nProvider value={{ locale, dict }}>
-      <LanguageRedirect currentLocale={locale} />
       <div className="min-h-screen grid grid-rows-[auto_1fr_auto]" dir={locale === "he" ? "rtl" : "ltr"}>
         <Header />
         <div>{children}</div>
