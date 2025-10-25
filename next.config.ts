@@ -17,6 +17,5 @@ export default function (phase: string): NextConfig {
     } as NextConfig;
   }
 
-  // In dev, do not use static export so middleware works
   return commonConfig;
 }
