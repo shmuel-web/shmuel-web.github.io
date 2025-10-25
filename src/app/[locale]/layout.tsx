@@ -9,8 +9,14 @@ export async function generateStaticParams() {
   return [{ locale: "en" }, { locale: "he" }];
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ locale: string }> 
+}): Promise<Metadata> {
   const { locale } = await params;
+  const dict = await getDictionary(locale as Locale);
+  
   return {
     alternates: {
       languages: {
@@ -19,7 +25,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         'x-default': '/he/'
       }
     },
-    title: locale === 'he' ? 'בלוג שלי' : 'My Blog'
+    title: {
+      template: `${dict.siteTitle} | %s`,
+      default: dict.siteTitle
+    }
   };
 }
 

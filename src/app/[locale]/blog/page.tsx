@@ -1,10 +1,26 @@
 import Link from "next/link";
 import { listPostsForLocale } from "@/lib/markdown";
+import { getDictionary } from "@/i18n/getDictionary";
+import type { Locale } from "@/i18n/locales";
+import type { Metadata } from "next";
 
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
 	return (["en", "he"] as const).map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ locale: string }> 
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const dict = await getDictionary(locale as Locale);
+  
+  return {
+    title: dict.blog.title
+  };
 }
 
 export default async function BlogIndex({ params }: { params: Promise<{ locale: string }> }) {
