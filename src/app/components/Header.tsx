@@ -70,7 +70,7 @@ function MobileMenu({ isOpen, onClose, locale, dict }: {
 }) {
   return (
     <div
-      className={`absolute top-full left-0 w-full backdrop-blur supports-[backdrop-filter]:bg-background/70 border-b border-[var(--border-color)] z-50 transition-all duration-300 ${
+      className={`absolute top-full left-0 w-full bg-[var(--background)] border-b border-[var(--border-color)] z-50 transition-all duration-300 ${
         isOpen ? "h-[calc(100vh-3.5rem)] opacity-100" : "h-0 opacity-0"
       } overflow-hidden`}
     >
