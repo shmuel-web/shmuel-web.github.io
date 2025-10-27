@@ -44,7 +44,7 @@ export default function Footer() {
               <Icon path={mdiLinkedin} size={1} />
           </a>
           <a
-            href="https://x.com/"
+            href="https://x.com/ShmuelDisraeli"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded p-1 hover:bg-[var(--hover-bg)]"
