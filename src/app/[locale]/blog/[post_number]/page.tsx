@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getPost, listPostNumbers, getLocalesForPost } from "@/lib/markdown";
+import Giscus from "@/app/components/Giscus";
 
 export const dynamicParams = false;
 
@@ -48,6 +49,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ local
 				{new Date(post.frontmatter.date).toLocaleDateString(locale)}
 			</p>
 			<div className="prose dark:prose-invert mt-6" dangerouslySetInnerHTML={{ __html: post.html }} />
+			<Giscus locale={locale} />
 		</article>
 	);
 }
