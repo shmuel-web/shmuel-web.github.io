@@ -98,6 +98,33 @@ Notes:
 - Files are returned with long-term cache headers (`Cache-Control: public, max-age=31536000, immutable`)
 - Prefer reasonably sized, compressed images for faster mobile load times
 
+## Git Hooks
+
+### Pre-commit: En-dash/Em-dash checker
+
+This repo runs `node scripts/check-em-dash.js` on `pre-commit` to ensure punctuation is consistent in content files.
+
+Setup (first time after cloning or after dependency changes):
+
+```bash
+npm install
+# simple-git-hooks runs during "prepare" and installs the git hooks
+```
+
+What it runs:
+
+```json
+"simple-git-hooks": {
+  "pre-commit": "npm run check:emdash"
+}
+```
+
+If the check fails, fix issues with:
+
+```bash
+npm run fix:emdash
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

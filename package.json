@@ -10,7 +10,8 @@
     "preview": "npm run build && npm run start",
     "lint": "eslint",
     "check:emdash": "node scripts/check-em-dash.js",
-    "fix:emdash": "node scripts/fix-em-dash.js"
+    "fix:emdash": "node scripts/fix-em-dash.js",
+    "prepare": "npx simple-git-hooks"
   },
   "dependencies": {
     "@mdi/js": "7.4.47",
@@ -39,6 +40,10 @@
     "eslint-config-next": "15.5.4",
     "glob": "^11.0.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "simple-git-hooks": "^2.10.0"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npm run check:emdash"
   }
 }
