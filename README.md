@@ -74,9 +74,29 @@ tags: ["nextjs", "בלוג"]
 
 ### 4. Content Guidelines
 - Use standard Markdown syntax
-- Images should be placed in `public/` directory
 - Both language versions will be automatically linked
 - Posts are sorted by date (newest first)
+
+### 5. Adding Images to a Blog Post
+
+Images can live alongside your post in `content/blog/<post_number>/` and are served at runtime via a built-in route.
+
+1. Place your image next to the Markdown files:
+   - `content/blog/004/my-photo.jpeg`
+2. Reference it in Markdown using an absolute URL rooted at `/content/blog/`:
+   - English:
+     ```markdown
+     ![My photo](/content/blog/004/my-photo.jpeg)
+     ```
+   - Hebrew:
+     ```markdown
+     ![התמונה שלי](/content/blog/004/my-photo.jpeg)
+     ```
+
+Notes:
+- Supported types: jpg, jpeg, png, webp, gif, svg
+- Files are returned with long-term cache headers (`Cache-Control: public, max-age=31536000, immutable`)
+- Prefer reasonably sized, compressed images for faster mobile load times
 
 ## Learn More
 
