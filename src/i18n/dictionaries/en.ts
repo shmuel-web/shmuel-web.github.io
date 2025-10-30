@@ -13,6 +13,14 @@ export default {
   home: {
     title: "Home",
     welcome: "Welcome to my Next.js blog.",
+    hero: {
+      title: "Between Worlds  the blog of Shmuel Disraeli.",
+      tagline:
+        "A baal teshuva, developer, and founder living across worlds  code and Torah, tech and faith, periphery and Tel Aviv.",
+      description:
+        "Here I try to connect worlds that seem far apart  to find the ideas, inspiration, and truth that live between them.",
+      cta: "Join the journey.",
+    },
   },
   about: {
     title: "About",
@@ -44,6 +52,7 @@ export default {
     language: "Language",
     english: "English",
     hebrew: "Hebrew",
+    default: "Default",
     theme: {
       label: "Theme",
       dark: "Dark",

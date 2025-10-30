@@ -2,11 +2,16 @@
   "name": "my-blog",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "start": "npx serve@latest out",
+    "preview": "npm run build && npm run start",
+    "lint": "eslint",
+    "check:emdash": "node scripts/check-em-dash.js",
+    "fix:emdash": "node scripts/fix-em-dash.js",
+    "prepare": "npx simple-git-hooks"
   },
   "dependencies": {
     "@mdi/js": "7.4.47",
@@ -23,6 +28,7 @@
     "remark-gfm": "^4.0.1",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
+    "turndown": "^7.2.2",
     "unified": "^11.0.5"
   },
   "devDependencies": {
@@ -33,7 +39,12 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
+    "glob": "^11.0.0",
+    "simple-git-hooks": "^2.10.0",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npm run check:emdash"
   }
 }
