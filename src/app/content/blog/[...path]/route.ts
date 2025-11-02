@@ -21,6 +21,8 @@ function getContentType(filePath: string): string {
       return "text/plain; charset=utf-8";
     case ".md":
       return "text/markdown; charset=utf-8";
+    case ".opus":
+      return "audio/opus";
     default:
       return "application/octet-stream";
   }

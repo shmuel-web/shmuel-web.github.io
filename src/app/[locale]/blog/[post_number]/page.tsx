@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getPost, listPostNumbers, getLocalesForPost } from "@/lib/markdown";
 import Giscus from "@/app/components/Giscus";
 import EditPostInline from "@/app/components/EditPostInline";
+import AudioPlayer from "@/app/components/AudioPlayer";
 
 export const dynamicParams = false;
 
@@ -51,6 +52,7 @@ export default async function BlogPostPage({ params, searchParams }: { params: P
             <p className="text-xs sm:text-sm opacity-70 mt-2">
                 {new Date(post.frontmatter.date).toLocaleDateString(locale)}
             </p>
+            <AudioPlayer postNumber={post_number} locale={locale as "en" | "he"} />
             {isEdit ? (
                 <EditPostInline initialHtml={post.html} initialMarkdown={post.markdown} dir={locale === "he" ? "rtl" : "ltr"} locale={locale} />
             ) : (

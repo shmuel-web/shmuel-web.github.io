@@ -11,13 +11,17 @@
     "lint": "eslint",
     "check:emdash": "node scripts/check-em-dash.js",
     "fix:emdash": "node scripts/fix-em-dash.js",
+    "generate:audio": "node scripts/generate-audio.js",
+    "generate:audio:dry-run": "node scripts/generate-audio.js --dry-run",
     "prepare": "npx simple-git-hooks"
   },
   "dependencies": {
     "@mdi/js": "7.4.47",
     "@mdi/react": "1.6.1",
+    "dotenv": "^17.2.3",
     "gray-matter": "^4.0.3",
     "next": "15.5.4",
+    "openai": "^4.71.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "rehype": "^13.0.2",

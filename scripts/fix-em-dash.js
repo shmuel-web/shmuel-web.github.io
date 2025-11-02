@@ -15,6 +15,7 @@ const __dirname = dirname(__filename);
 const projectRoot = join(__dirname, '..');
 
 const EM_DASH = '—';
+const DOUBLE_SPACE_EM_DASH = ' — ';
 const CONTENT_DIR = join(projectRoot, 'content');
 
 // Find all .md files in content directory
@@ -34,8 +35,10 @@ for (const filePath of files) {
   const count = (content.match(new RegExp(EM_DASH, 'g')) || []).length;
   
   if (count > 0) {
+    // Remove all double space em dashes and replace with single space
+    const cleanedContent = content.replace(new RegExp(DOUBLE_SPACE_EM_DASH, 'g'), ' ');
     // Remove all em dashes
-    const fixedContent = content.replace(new RegExp(EM_DASH, 'g'), '');
+    const fixedContent = cleanedContent.replace(new RegExp(EM_DASH, 'g'), '');
     
     // Write back to file
     writeFileSync(filePath, fixedContent, 'utf8');
