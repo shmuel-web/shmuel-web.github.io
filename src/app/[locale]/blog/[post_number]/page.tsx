@@ -6,6 +6,7 @@ import EditPostInline from "@/app/components/EditPostInline";
 import AudioPlayer from "@/app/components/AudioPlayer";
 
 export const dynamicParams = false;
+export const dynamic = "force-static";
 
 export async function generateStaticParams() {
 	const ids = listPostNumbers();
@@ -40,9 +41,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 	};
 }
 
-export default async function BlogPostPage({ params, searchParams }: { params: Promise<{ locale: string; post_number: string }>; searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
+export default async function BlogPostPage({ params, searchParams }: { params: Promise<{ locale: string; post_number: string }>; searchParams?: Promise<{ [key: string]: string | string[] | undefined }> }) {
   const { locale, post_number } = await params;
-  const sp = await searchParams;
+  const sp = searchParams ? await searchParams : {};
   const isEdit = sp && Object.prototype.hasOwnProperty.call(sp, "edit");
   const post = await getPost(locale, post_number);
   if (!post) notFound();

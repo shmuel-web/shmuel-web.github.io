@@ -57,3 +57,5 @@ draft: false
 עוד תהיה לראש פינה
 
 אבל עד אז לפחות נשתתף בצער השכינה
+
+![שכינתא בגלותא](/content/blog/004/shinta_begaluta.png)
