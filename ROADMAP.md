@@ -23,6 +23,16 @@ This document outlines the planned features and enhancements for the blog projec
   - Mobile-friendly audio player interface
   - Quality voice synthesis with natural pronunciation
 
+### 3. blog-flow
+- **Goal** Convert a recording of myself into a blog post
+- **Features to implement**:
+  - easy way to upload original recording to github
+  - gh-action to transcribe the audio
+  - send it to an LLM with a prompt to turn it in to a post in hebrew wiht the tags Summary and title
+  - translate the post to english
+  - go over the text to polish it and make it as readable as possible, adding dots, exlemation marks, divideing it to pragraphs etc  
+  - generate audio content for the post
+
 ## Implementation Considerations
 
 ### Technical Requirements
@@ -40,5 +50,8 @@ This document outlines the planned features and enhancements for the blog projec
 ---
 
 *Last updated: January 2025*
+
+
+
 
 

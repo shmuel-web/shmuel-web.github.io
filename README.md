@@ -98,6 +98,87 @@ Notes:
 - Files are returned with long-term cache headers (`Cache-Control: public, max-age=31536000, immutable`)
 - Prefer reasonably sized, compressed images for faster mobile load times
 
+## Blog Flow - Audio to Post Automation
+
+The blog-flow feature automatically converts voice recordings into bilingual blog posts with audio playback.
+
+### How It Works
+
+1. **Upload Recording**: Create a new post directory and add your recording file named `original_audio.*` (any audio format supported)
+2. **Automatic Processing**: When you commit or merge a PR, GitHub Actions will:
+   - Transcribe the audio using OpenAI Whisper
+   - Generate a Hebrew blog post with title, summary, and tags
+   - Translate to English
+   - Polish both versions (punctuation, paragraphs, formatting)
+   - Generate audio files for both languages
+   - Create posts as **drafts** for your review
+
+### Usage
+
+1. **Create Post Directory** (with auto-incremented number or specific number):
+   ```bash
+   mkdir content/blog/004
+   # or let it auto-increment by using any name
+   ```
+
+2. **Add Your Recording**:
+   ```bash
+   # Place your recording in the post directory
+   # File must be named: original_audio.*
+   cp ~/my-recording.mp3 content/blog/004/original_audio.mp3
+   ```
+
+3. **Commit and Push**:
+   ```bash
+   git add content/blog/004/
+   git commit -m "feat: add audio recording for new post"
+   git push
+   ```
+
+4. **Review Generated Post**:
+   - The workflow will create `he.md` and `en.md` files
+   - Both posts start as **drafts** (`draft: true` in frontmatter)
+   - Review the content, make any edits needed
+   - When ready to publish, remove `draft: true` from both files
+
+5. **Publish**:
+   ```bash
+   # Edit he.md and en.md to remove draft: true
+   git add content/blog/004/
+   git commit -m "publish: post 004"
+   git push
+   ```
+
+### Requirements
+
+- **GitHub Secrets**: `OPENAI_API_KEY` must be set in your repository secrets
+- **File Naming**: Recording must be named `original_audio.*` (extension can be any audio format)
+- **Post Directory**: Can be auto-numbered or use a specific number (e.g., `004`)
+
+### Generated Files
+
+After processing, the post directory will contain:
+- `he.md` - Hebrew blog post (draft)
+- `en.md` - English blog post (draft)
+- `listen-he.opus` - Hebrew audio file
+- `listen-en.opus` - English audio file
+- `original_audio.*` - Your original recording (preserved)
+
+### Manual Processing
+
+You can also run the script manually for testing:
+
+```bash
+node scripts/blog-flow/index.js content/blog/004
+```
+
+### Notes
+
+- Posts are automatically created as **drafts** - you must manually remove `draft: true` to publish
+- The workflow triggers on push or PR merge when `original_audio.*` files are detected
+- Post numbers are auto-incremented if directory name is not numeric
+- Audio transcription assumes Hebrew input (can be adjusted in script)
+
 ## Git Hooks
 
 ### Pre-commit: En-dash/Em-dash checker
