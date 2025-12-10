@@ -1,10 +1,29 @@
-"use client";
-
 import ComingSoon from "@/app/components/ComingSoon";
-import { useI18n } from "@/i18n/I18nProvider";
+import { getDictionary } from "@/i18n/getDictionary";
+import type { Locale } from "@/i18n/locales";
+import type { Metadata } from "next";
 
-export default function WorkPage() {
-  const { dict } = useI18n();
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ locale: string }> 
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const dict = await getDictionary(locale as Locale);
+  
+  return {
+    title: dict.work.title
+  };
+}
+
+export default async function WorkPage({ 
+  params 
+}: { 
+  params: Promise<{ locale: string }> 
+}) {
+  const { locale } = await params;
+  const dict = await getDictionary(locale as Locale);
+  
   return (
     <main className="max-w-2xl mx-auto w-full p-8 sm:p-12">
       <h1 className="text-3xl sm:text-4xl font-bold">{dict.work.title}</h1>

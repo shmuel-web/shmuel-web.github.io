@@ -1,9 +1,0 @@
-- i18n / default to english / show a switch button in the footer
-- dark mode / show nice icon for light/dark defaults to auto (systeme settings)
-- rtl ltr support
-- deploy to my github pages
-- blog pages should be in hebrew and english
-- we will have blog dir in this repo
-    - and it would contain MD file to be renderd
-    - lets try to address the lang as every post would be translated
-    - we will use the blog dir to deploy using SSG
