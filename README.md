@@ -72,12 +72,45 @@ tags: ["nextjs", "בלוג"]
 - `tags`: Array of tags for categorization
 - `draft`: Set to `true` to exclude from production (optional)
 
-### 4. Content Guidelines
+### 4. Available Tags
+
+Tags should be used consistently across posts. Here is the complete list of available tags:
+
+**Hebrew Tags:**
+- `מדע` - Science
+- `קבלה` - Kabbalah
+- `תורה` - Torah
+- `כלכלה` - Economics
+- `חברה` - Society
+- `תוכנה` - Software
+
+**English Tags:**
+- `Science`
+- `Kabbalah`
+- `Torah`
+- `Economics`
+- `Society`
+- `Software`
+
+**Additional Tags** (used in existing posts):
+- `Between Worlds` / `בין העולמות`
+- `Thinking` / `חשיבה`
+- `Torah, Technology, and Society` / `תורה טכנולוגיה וחברה`
+- `Beginning` / `התחלה`
+- `Reflection` / `הרהור`
+- `Culture & Society` / `תרבות וחברה`
+- `Simplicity` / `פשטות`
+- `Design` / `עיצוב`
+- `RTL`
+- `Redemption` / `גאולה`
+- `Baal Teshuvah` / `חוזרים בתשובה`
+
+### 5. Content Guidelines
 - Use standard Markdown syntax
 - Both language versions will be automatically linked
 - Posts are sorted by date (newest first)
 
-### 5. Adding Images to a Blog Post
+### 6. Adding Images to a Blog Post
 
 Images can live alongside your post in `content/blog/<post_number>/` and are served at runtime via a built-in route.
 
