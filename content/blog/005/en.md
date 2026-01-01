@@ -8,8 +8,7 @@ tags: ['Software', 'Science', 'Society']
 draft: true
 ---
 
-Human Efficiency (Poem)
-
+<pre>
 "
 I stopped calling artificial intelligence
 artificial intelligence
@@ -27,6 +26,7 @@ and give all of us the ability to truly listen and understand
 and discover wisdom
 the wisdom that is revealed only after intelligence
 "
+</pre>
 
 
 
