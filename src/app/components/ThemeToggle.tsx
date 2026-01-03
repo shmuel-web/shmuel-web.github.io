@@ -17,7 +17,7 @@ function applyTheme(choice: ThemeChoice) {
 }
 
 export default function ThemeToggle() {
-  const { dict } = useI18n();
+  const { dict, locale } = useI18n();
   const [choice, setChoice] = useState<ThemeChoice>("system");
   const [systemPrefersDark, setSystemPrefersDark] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
@@ -83,7 +83,7 @@ export default function ThemeToggle() {
       {open && (
         <div
           role="menu"
-          className="absolute z-20 right-0 bottom-full mb-2 min-w-32 rounded-md border border-[var(--border-color)] bg-[var(--background)] p-1 shadow-md"
+          className={`absolute z-20 ${locale === "he" ? "left-0" : "right-0"} bottom-full mb-2 min-w-32 rounded-md border border-[var(--border-color)] bg-[var(--background)] p-1 shadow-md`}
         >
           <MenuItem
             active={choice === "dark"}

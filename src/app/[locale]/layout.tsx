@@ -3,9 +3,33 @@ import Header from "../components/Header";
 import { I18nProvider } from "@/i18n/I18nProvider";
 import { getDictionary } from "@/i18n/getDictionary";
 import type { Locale } from "@/i18n/locales";
+import type { Metadata } from "next";
 
 export async function generateStaticParams() {
   return [{ locale: "en" }, { locale: "he" }];
+}
+
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ locale: string }> 
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const dict = await getDictionary(locale as Locale);
+  
+  return {
+    alternates: {
+      languages: {
+        'he': '/he/',
+        'en': '/en/',
+        'x-default': '/he/'
+      }
+    },
+    title: {
+      template: `${dict.siteTitle} | %s`,
+      default: dict.siteTitle
+    }
+  };
 }
 
 export default async function LocaleLayout({
