@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
 import remarkRehype from "remark-rehype";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -42,6 +43,7 @@ export function getLocalesForPost(postNumber: string): Locale[] {
 export async function renderMarkdownToHtml(markdown: string): Promise<string> {
 	const file = await unified()
 		.use(remarkParse)
+		.use(remarkBreaks)
 		.use(remarkGfm)
 		.use(remarkRehype)
 		.use(rehypeSlug)
