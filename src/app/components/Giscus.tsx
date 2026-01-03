@@ -54,7 +54,7 @@ export default function Giscus({ locale }: GiscusProps) {
 		script.setAttribute("data-category-id", "DIC_kwDOAlT1tM4CxOCL");
 		script.setAttribute("data-mapping", "pathname");
 		script.setAttribute("data-strict", "0");
-		script.setAttribute("data-reactions-enabled", "1");
+		script.setAttribute("data-reactions-enabled", "0");
 		script.setAttribute("data-emit-metadata", "0");
 		script.setAttribute("data-input-position", "bottom");
 		script.setAttribute("data-theme", "preferred_color_scheme");
