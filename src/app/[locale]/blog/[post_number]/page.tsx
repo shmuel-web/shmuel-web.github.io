@@ -4,6 +4,9 @@ import { getPost, listPostNumbers, getLocalesForPost } from "@/lib/markdown";
 import Giscus from "@/app/components/Giscus";
 import EditPostInline from "@/app/components/EditPostInline";
 import AudioPlayer from "@/app/components/AudioPlayer";
+import NewsletterSubscribe from "@/app/components/NewsletterSubscribe";
+import { getDictionary } from "@/i18n/getDictionary";
+import type { Locale } from "@/i18n/locales";
 
 export const dynamicParams = false;
 export const dynamic = "force-static";
@@ -46,6 +49,7 @@ export default async function BlogPostPage({ params, searchParams }: { params: P
   const sp = searchParams ? await searchParams : {};
   const isEdit = sp && Object.prototype.hasOwnProperty.call(sp, "edit");
   const post = await getPost(locale, post_number);
+  const dict = await getDictionary(locale as Locale);
   if (!post) notFound();
   return (
         <article className="max-w-screen-sm mx-auto w-full px-4 sm:px-6 md:px-8 py-8" dir={locale === "he" ? "rtl" : "ltr"}>
@@ -60,6 +64,14 @@ export default async function BlogPostPage({ params, searchParams }: { params: P
                 <div className="prose dark:prose-invert mt-6" dangerouslySetInnerHTML={{ __html: post.html }} />
             )}
             <Giscus locale={locale} />
+            <NewsletterSubscribe
+              locale={locale as Locale}
+              heading={dict.newsletter.heading}
+              promise={dict.newsletter.promise}
+              emailPlaceholder={dict.newsletter.emailPlaceholder}
+              submit={dict.newsletter.submit}
+              formAction={dict.newsletter.formAction}
+            />
         </article>
     );
 }

@@ -65,4 +65,11 @@ export default {
       system: "Auto",
     },
   },
+  newsletter: {
+    heading: "Subscribe and get new posts directly to your email",
+    promise: "I promise not to send spam",
+    emailPlaceholder: "Your email",
+    submit: "Subscribe",
+    formAction: "PLACEHOLDER_ENGLISH_URL",
+  },
 } as const;

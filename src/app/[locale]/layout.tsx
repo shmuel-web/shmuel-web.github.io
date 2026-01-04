@@ -33,7 +33,10 @@ export async function generateMetadata({
     title: {
       template: `${dict.siteTitle} | %s`,
       default: dict.siteTitle
-    }
+    },
+    other: locale === 'he' ? {
+      'follow.it-verification-code': 'QRk0xmQAwpLgXNx4Jpqk'
+    } : {}
   };
 }
 

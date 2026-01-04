@@ -65,4 +65,11 @@ export default {
       system: "אוטומטי",
     },
   },
+  newsletter: {
+    heading: "רוצים לקבל מאמרים חדשים ישירות למייל שלכם",
+    promise: "מבטיח לא לשלוח ספאם",
+    emailPlaceholder: "המייל שלכם",
+    submit: "הרשמה",
+    formAction: "https://api.follow.it/subscription-form/TFpqVjZ3RlpBdlpKRE5ydXN4N1FyWGh3RWx0QkV2REhVREU1eWN1YytIVitHWVN0N1R3bW95akV2VEFJQ2ZvUGgxYnFJZXZTeVQ0MEs3Vm5QckhNNFFpclJQckMvc292VUhhdEhlZ3o3Z3RsOW1aT2FGc09zV1JGVmhoRHFwTXl8bjBZR0xtV3RvOEdwaE1aaVlMcGZyMzdGT2NvR1hRVzJJTTFjY2tDcTY3bz0=/8",
+  },
 } as const;
