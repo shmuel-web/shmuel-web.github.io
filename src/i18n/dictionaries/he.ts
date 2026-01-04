@@ -29,6 +29,11 @@ export default {
   blog: {
     title: "בלוג",
     description: "כתיבה, הערות ורעיונות.",
+    searchPlaceholder: "חיפוש פוסטים...",
+    articles: "מאמרים",
+    topics: "נושאים",
+    noResults: "לא נמצאו תוצאות",
+    clearAll: "נקה הכל",
   },
   work: {
     title: "עבודות",

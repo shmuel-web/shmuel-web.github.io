@@ -29,6 +29,11 @@ export default {
   blog: {
     title: "Blog",
     description: "Writing, notes, and ideas.",
+    searchPlaceholder: "Search posts...",
+    articles: "Articles",
+    topics: "Topics",
+    noResults: "No results found",
+    clearAll: "Clear all",
   },
   work: {
     title: "Work",

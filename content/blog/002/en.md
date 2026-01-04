@@ -5,15 +5,14 @@ title: |
 date: '2025-10-29'
 summary: 'A thought that came to me over coffee why don’t I drink espresso like everyone else, and what that says about identity, culture, and roots.'
 tags: ['Between Worlds', 'Reflection', 'Culture & Society', 'Simplicity']
-draft: true
 
 ---
 
 ### Turkish Coffee in an Espresso Cup ☕
 
-![Turkish coffee](/content/blog/002/turky-coffee.jpeg)
 
-I made myself a Turkish coffee in an espresso cup,  
+
+I made myself a Turkish coffee in a small espresso cup,  
 and suddenly a thought came to me  
 why don’t I drink espresso  
 Or an Americano, like everyone else?
@@ -30,3 +29,4 @@ It’s strong small coffee.
 And then I thought to myself  
 I’m a bit like that too.  
 A Turkish coffee in an espresso cup.  
+![Turkish coffee](/content/blog/002/turky-coffee.jpeg)

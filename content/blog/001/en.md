@@ -23,6 +23,7 @@ Financial pressures pushed me to seek a profession and give up my spiritual aspi
 By the time I realized that software and entrepreneurship were what I truly wanted to do, I was already a married kollel student with two children.  
 I began studying independently and through courses until I finally got an opportunity  and suddenly, I was a high-tech professional,  
 with an office overlooking the sea in Tel Aviv.
+![sea view](/content/blog/001/sky-line.jpeg)
 
 ### From falling between the cracks to connecting the worlds
 

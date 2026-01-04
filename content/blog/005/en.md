@@ -5,7 +5,6 @@ title: |
 date: '2025-12-25'
 summary: 'I stopped calling artificial intelligence artificial intelligence. I call it intelligence, just intelligence.'
 tags: ['Software', 'Science', 'Society']
-draft: true
 ---
 
 "  
