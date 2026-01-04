@@ -9,11 +9,21 @@ type Post = {
   frontmatter: Frontmatter;
 };
 
+type PostWithContent = {
+  post_number: string;
+  title: string;
+  summary?: string;
+  content: string;
+  tags?: string[];
+  draft?: boolean;
+};
+
 type BlogSearchProps = {
   posts: Post[];
   locale: string;
   searchValue: string;
   onSearchChange: (value: string) => void;
+  onSearchSubmit: () => void;
   onTopicClick: (topic: string) => void;
   dict: {
     searchPlaceholder: string;
@@ -28,11 +38,13 @@ export default function BlogSearch({
   locale,
   searchValue,
   onSearchChange,
+  onSearchSubmit,
   onTopicClick,
   dict,
 }: BlogSearchProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const [postsWithContent, setPostsWithContent] = useState<PostWithContent[] | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
@@ -41,14 +53,34 @@ export default function BlogSearch({
     new Set(posts.flatMap((post) => post.frontmatter.tags || []))
   ).sort();
 
+  // Load search index with full content
+  const loadSearchIndex = async () => {
+    if (postsWithContent) return; // Already loaded
+    
+    try {
+      const response = await fetch(`/api/search-index/${locale}`);
+      const data = await response.json();
+      setPostsWithContent(data);
+    } catch (error) {
+      console.error('Failed to load search index:', error);
+    }
+  };
+
   // Filter posts and topics based on search
   const searchLower = searchValue.toLowerCase().trim();
-  const matchingPosts = searchLower
-    ? posts.filter(
-        (post) =>
+  
+  // Use postsWithContent if available for content search, otherwise fall back to posts
+  const matchingPosts: (Post | PostWithContent)[] = searchLower
+    ? postsWithContent 
+      ? postsWithContent.filter((post) =>
+          post.title?.toLowerCase().includes(searchLower) ||
+          post.summary?.toLowerCase().includes(searchLower) ||
+          post.content?.toLowerCase().includes(searchLower)
+        )
+      : posts.filter((post) =>
           post.frontmatter.title?.toLowerCase().includes(searchLower) ||
           post.frontmatter.summary?.toLowerCase().includes(searchLower)
-      )
+        )
     : [];
   
   const matchingTopics = searchLower
@@ -90,12 +122,21 @@ export default function BlogSearch({
 
   const handleInputFocus = () => {
     setIsOpen(true);
+    loadSearchIndex(); // Load content for search
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (!isOpen) return;
+    if (!isOpen) {
+      // If dropdown is closed and Enter is pressed, submit search
+      if (e.key === "Enter") {
+        e.preventDefault();
+        onSearchSubmit();
+        setIsOpen(false);
+      }
+      return;
+    }
 
-    const totalItems = matchingPosts.length + matchingTopics.length;
+    const totalItems = matchingTopics.length + matchingPosts.length;
 
     if (e.key === "ArrowDown") {
       e.preventDefault();
@@ -103,13 +144,22 @@ export default function BlogSearch({
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : -1));
-    } else if (e.key === "Enter" && highlightedIndex >= 0) {
+    } else if (e.key === "Enter") {
       e.preventDefault();
-      if (highlightedIndex < matchingPosts.length) {
-        handlePostClick(matchingPosts[highlightedIndex].post_number);
+      if (highlightedIndex >= 0) {
+        // Navigate to highlighted item (topics first, then posts)
+        if (highlightedIndex < matchingTopics.length) {
+          const topic = matchingTopics[highlightedIndex];
+          handleTopicClick(topic);
+        } else {
+          const postIndex = highlightedIndex - matchingTopics.length;
+          const post = matchingPosts[postIndex];
+          handlePostClick(post.post_number);
+        }
       } else {
-        const topicIndex = highlightedIndex - matchingPosts.length;
-        handleTopicClick(matchingTopics[topicIndex]);
+        // No item highlighted, submit search
+        onSearchSubmit();
+        setIsOpen(false);
       }
     } else if (e.key === "Escape") {
       setIsOpen(false);
@@ -150,7 +200,7 @@ export default function BlogSearch({
 
       {isOpen && (searchValue || !searchValue) && (
         <div 
-          className="absolute z-50 w-full mt-2 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 max-h-96 overflow-y-auto"
+          className="absolute z-50 w-full mt-2 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 max-h-96 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
           dir={isRTL ? "rtl" : "ltr"}
         >
           {!hasResults && searchValue && (
@@ -159,47 +209,20 @@ export default function BlogSearch({
             </div>
           )}
 
-          {matchingPosts.length > 0 && (
-            <div className="py-2">
-              <div className="px-4 py-2 text-xs font-semibold opacity-60 uppercase">
-                {dict.articles}
-              </div>
-              {matchingPosts.map((post, idx) => (
-                <button
-                  key={post.post_number}
-                  onClick={() => handlePostClick(post.post_number)}
-                  className={`w-full text-left px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors active:bg-gray-200 dark:active:bg-gray-600 touch-manipulation ${
-                    highlightedIndex === idx ? "bg-gray-100 dark:bg-gray-700" : ""
-                  }`}
-                >
-                  <div className="font-medium text-sm">
-                    {post.frontmatter.title}
-                  </div>
-                  {post.frontmatter.summary && (
-                    <div className="text-xs opacity-60 mt-1 line-clamp-2">
-                      {post.frontmatter.summary}
-                    </div>
-                  )}
-                </button>
-              ))}
-            </div>
-          )}
-
           {matchingTopics.length > 0 && (
-            <div className="py-2 border-t border-gray-200 dark:border-gray-700">
+            <div className="py-2">
               <div className="px-4 py-2 text-xs font-semibold opacity-60 uppercase">
                 {dict.topics}
               </div>
               <div className="px-4 pb-2">
                 <div className="flex flex-wrap gap-2">
                   {matchingTopics.map((topic, idx) => {
-                    const itemIdx = matchingPosts.length + idx;
                     return (
                       <button
                         key={topic}
                         onClick={() => handleTopicClick(topic)}
                         className={`px-3 py-1.5 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-xs transition-colors active:scale-95 touch-manipulation ${
-                          highlightedIndex === itemIdx
+                          highlightedIndex === idx
                             ? "ring-2 ring-gray-400 dark:ring-gray-500"
                             : ""
                         }`}
@@ -210,6 +233,41 @@ export default function BlogSearch({
                   })}
                 </div>
               </div>
+            </div>
+          )}
+
+          {matchingPosts.length > 0 && (
+            <div className={`py-2 ${matchingTopics.length > 0 ? "border-t border-gray-200 dark:border-gray-700" : ""}`}>
+              <div className="px-4 py-2 text-xs font-semibold opacity-60 uppercase">
+                {dict.articles}
+              </div>
+              {matchingPosts.map((post, idx) => {
+                // Check if it's PostWithContent or Post
+                const isPostWithContent = 'title' in post;
+                const postNumber = post.post_number;
+                const title = isPostWithContent ? post.title : post.frontmatter.title;
+                const summary = isPostWithContent ? post.summary : post.frontmatter.summary;
+                const itemIdx = matchingTopics.length + idx;
+                
+                return (
+                  <button
+                    key={postNumber}
+                    onClick={() => handlePostClick(postNumber)}
+                    className={`w-full text-left px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors active:bg-gray-200 dark:active:bg-gray-600 touch-manipulation ${
+                      highlightedIndex === itemIdx ? "bg-gray-100 dark:bg-gray-700" : ""
+                    }`}
+                  >
+                    <div className="font-medium text-sm">
+                      {title}
+                    </div>
+                    {summary && (
+                      <div className="text-xs opacity-60 mt-1 line-clamp-2">
+                        {summary}
+                      </div>
+                    )}
+                  </button>
+                );
+              })}
             </div>
           )}
         </div>

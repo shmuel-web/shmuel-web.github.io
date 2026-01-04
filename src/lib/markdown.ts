@@ -80,5 +80,28 @@ export function listPostsForLocale(locale: string): Array<{ post_number: string;
     .filter(Boolean) as Array<{ post_number: string; frontmatter: Frontmatter }>;
 }
 
+export function listPostsWithContentForLocale(locale: string): Array<{ 
+  post_number: string; 
+  frontmatter: Frontmatter;
+  content: string;
+}>{
+  return listPostNumbers()
+    .map((id) => {
+      const filePath = path.join(CONTENT_ROOT, id, `${locale}.md`);
+      if (!fs.existsSync(filePath)) return null;
+      const raw = fs.readFileSync(filePath, "utf8");
+      const { data, content } = matter(raw);
+      return { 
+        post_number: id, 
+        frontmatter: data as Frontmatter,
+        content: content
+      };
+    })
+    .filter(Boolean) as Array<{ 
+      post_number: string; 
+      frontmatter: Frontmatter;
+      content: string;
+    }>;
+}
 
 

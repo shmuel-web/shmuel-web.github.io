@@ -12,6 +12,15 @@ type Post = {
   frontmatter: Frontmatter;
 };
 
+type PostWithContent = {
+  post_number: string;
+  title: string;
+  summary?: string;
+  content: string;
+  tags?: string[];
+  draft?: boolean;
+};
+
 type BlogClientProps = {
   posts: Post[];
   locale: string;
@@ -32,8 +41,9 @@ function BlogClientContent({ posts, locale, dict }: BlogClientProps) {
 
   // Initialize state from URL params
   const [searchValue, setSearchValue] = useState("");
+  const [submittedSearch, setSubmittedSearch] = useState("");
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
-  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [postsWithContent, setPostsWithContent] = useState<PostWithContent[] | null>(null);
 
   // Parse URL params on mount
   useEffect(() => {
@@ -45,18 +55,26 @@ function BlogClientContent({ posts, locale, dict }: BlogClientProps) {
     }
     if (searchParam) {
       setSearchValue(searchParam);
-      setDebouncedSearch(searchParam);
+      setSubmittedSearch(searchParam);
     }
   }, [searchParams]);
 
-  // Debounce search input
+  // Load search index with full content when search is submitted
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearch(searchValue);
-    }, 300);
+    const loadSearchIndex = async () => {
+      if (postsWithContent || !submittedSearch.trim()) return; // Already loaded or no search
+      
+      try {
+        const response = await fetch(`/api/search-index/${locale}`);
+        const data = await response.json();
+        setPostsWithContent(data);
+      } catch (error) {
+        console.error('Failed to load search index:', error);
+      }
+    };
 
-    return () => clearTimeout(timer);
-  }, [searchValue]);
+    loadSearchIndex();
+  }, [submittedSearch, locale, postsWithContent]);
 
   // Update URL when filters change
   const updateURL = useCallback(
@@ -79,10 +97,10 @@ function BlogClientContent({ posts, locale, dict }: BlogClientProps) {
     [pathname, router]
   );
 
-  // Update URL when debounced search or topics change
+  // Update URL when submitted search or topics change
   useEffect(() => {
-    updateURL(selectedTopics, debouncedSearch);
-  }, [selectedTopics, debouncedSearch, updateURL]);
+    updateURL(selectedTopics, submittedSearch);
+  }, [selectedTopics, submittedSearch, updateURL]);
 
   const handleTopicAdd = (topic: string) => {
     if (!selectedTopics.includes(topic)) {
@@ -96,6 +114,10 @@ function BlogClientContent({ posts, locale, dict }: BlogClientProps) {
 
   const handleClearAllTopics = () => {
     setSelectedTopics([]);
+  };
+
+  const handleSearchSubmit = () => {
+    setSubmittedSearch(searchValue);
   };
 
   // Filter and sort posts
@@ -113,16 +135,30 @@ function BlogClientContent({ posts, locale, dict }: BlogClientProps) {
         if (!hasAllTopics) return false;
       }
 
-      // Filter by search text (title or summary)
-      if (debouncedSearch.trim()) {
-        const searchLower = debouncedSearch.toLowerCase();
+      // Filter by search text (title, summary, or content if available)
+      if (submittedSearch.trim()) {
+        const searchLower = submittedSearch.toLowerCase();
         const matchesTitle = p.frontmatter.title
           ?.toLowerCase()
           .includes(searchLower);
         const matchesSummary = p.frontmatter.summary
           ?.toLowerCase()
           .includes(searchLower);
-        if (!matchesTitle && !matchesSummary) return false;
+        
+        // If content is loaded, also search through it
+        let matchesContent = false;
+        if (postsWithContent) {
+          const postWithContent = postsWithContent.find(
+            (pc) => pc.post_number === p.post_number
+          );
+          if (postWithContent) {
+            matchesContent = postWithContent.content
+              .toLowerCase()
+              .includes(searchLower);
+          }
+        }
+        
+        if (!matchesTitle && !matchesSummary && !matchesContent) return false;
       }
 
       return true;
@@ -144,6 +180,7 @@ function BlogClientContent({ posts, locale, dict }: BlogClientProps) {
           locale={locale}
           searchValue={searchValue}
           onSearchChange={setSearchValue}
+          onSearchSubmit={handleSearchSubmit}
           onTopicClick={handleTopicAdd}
           dict={{
             searchPlaceholder: dict.searchPlaceholder,
