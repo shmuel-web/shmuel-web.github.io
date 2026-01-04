@@ -19,7 +19,10 @@ export async function generateMetadata({
   const dict = await getDictionary(locale as Locale);
   
   return {
-    title: dict.blog.title
+    title: dict.blog.title,
+    other: {
+      'follow.it-verification-code': locale === 'he' ? 'QRk0xmQAwpLgXNx4Jpqk' : 'HLzxBeb1pv5FYC2hzaZr'
+    }
   };
 }
 
