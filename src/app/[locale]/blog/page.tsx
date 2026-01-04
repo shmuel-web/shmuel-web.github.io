@@ -3,6 +3,7 @@ import { getDictionary } from "@/i18n/getDictionary";
 import type { Locale } from "@/i18n/locales";
 import type { Metadata } from "next";
 import BlogClient from "@/app/components/BlogClient";
+import NewsletterSubscribe from "@/app/components/NewsletterSubscribe";
 
 export const dynamicParams = false;
 
@@ -32,17 +33,29 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
   const posts = listPostsForLocale(locale);
 
   return (
-    <BlogClient
-      posts={posts}
-      locale={locale}
-      dict={{
-        title: locale === "he" ? "בלוג" : "Blog",
-        searchPlaceholder: dict.blog.searchPlaceholder,
-        articles: dict.blog.articles,
-        topics: dict.blog.topics,
-        noResults: dict.blog.noResults,
-        clearAll: dict.blog.clearAll,
-      }}
-    />
+    <>
+      <BlogClient
+        posts={posts}
+        locale={locale}
+        dict={{
+          title: locale === "he" ? "בלוג" : "Blog",
+          searchPlaceholder: dict.blog.searchPlaceholder,
+          articles: dict.blog.articles,
+          topics: dict.blog.topics,
+          noResults: dict.blog.noResults,
+          clearAll: dict.blog.clearAll,
+        }}
+      />
+      <div className="max-w-screen-sm mx-auto w-full px-4 sm:px-6 md:px-8">
+        <NewsletterSubscribe
+          locale={locale as Locale}
+          heading={dict.newsletter.heading}
+          promise={dict.newsletter.promise}
+          emailPlaceholder={dict.newsletter.emailPlaceholder}
+          submit={dict.newsletter.submit}
+          formAction={dict.newsletter.formAction}
+        />
+      </div>
+    </>
   );
 }
