@@ -23,6 +23,11 @@ export async function generateMetadata({
         'he': '/he/',
         'en': '/en/',
         'x-default': '/he/'
+      },
+      types: {
+        'application/rss+xml': [
+          { url: `/rss/${locale}.xml`, title: `RSS Feed (${locale})` }
+        ]
       }
     },
     title: {
