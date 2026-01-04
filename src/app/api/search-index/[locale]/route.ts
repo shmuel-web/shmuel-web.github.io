@@ -1,5 +1,14 @@
 import { listPostsWithContentForLocale } from '@/lib/markdown';
 
+export const dynamic = 'force-static';
+
+export async function generateStaticParams() {
+  return [
+    { locale: 'en' },
+    { locale: 'he' }
+  ];
+}
+
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ locale: string }> }
