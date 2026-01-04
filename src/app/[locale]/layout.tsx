@@ -34,9 +34,9 @@ export async function generateMetadata({
       template: `${dict.siteTitle} | %s`,
       default: dict.siteTitle
     },
-    other: locale === 'he' ? {
-      'follow.it-verification-code': 'QRk0xmQAwpLgXNx4Jpqk'
-    } : {}
+    other: {
+      'follow.it-verification-code': locale === 'he' ? 'QRk0xmQAwpLgXNx4Jpqk' : 'HLzxBeb1pv5FYC2hzaZr'
+    }
   };
 }
 
