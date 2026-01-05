@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface GiscusProps {
 	locale: string;
+	noCommentsMessage: string;
 }
 
 /**
@@ -35,8 +36,11 @@ function changeGiscusTheme(theme: "light" | "dark") {
 	);
 }
 
-export default function Giscus({ locale }: GiscusProps) {
+
+export default function Giscus({ locale, noCommentsMessage }: GiscusProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
+	const [commentCount, setCommentCount] = useState<number | null>(null);
+	const [showComments, setShowComments] = useState(false);
 
 	// Effect to load Giscus script
 	useEffect(() => {
@@ -55,7 +59,7 @@ export default function Giscus({ locale }: GiscusProps) {
 		script.setAttribute("data-mapping", "pathname");
 		script.setAttribute("data-strict", "0");
 		script.setAttribute("data-reactions-enabled", "0");
-		script.setAttribute("data-emit-metadata", "0");
+		script.setAttribute("data-emit-metadata", "1");
 		script.setAttribute("data-input-position", "bottom");
 		script.setAttribute("data-theme", "preferred_color_scheme");
 		script.setAttribute("data-lang", locale);
@@ -80,6 +84,32 @@ export default function Giscus({ locale }: GiscusProps) {
 			}
 		};
 	}, [locale]);
+
+	// Effect to listen for Giscus metadata messages
+	useEffect(() => {
+		const handleMessage = (event: MessageEvent) => {
+			// Only accept messages from Giscus
+			if (event.origin !== "https://giscus.app") return;
+			
+			// Check if this is a metadata message
+			if (event.data?.giscus?.discussion) {
+				const discussion = event.data.giscus.discussion;
+				// Try different properties that might contain comment count
+				const count = discussion.totalCommentCount ?? discussion.reactionCount ?? 0;
+				setCommentCount(count);
+				// If there are comments, show the comment section automatically
+				if (count > 0) {
+					setShowComments(true);
+				}
+			}
+		};
+
+		window.addEventListener("message", handleMessage);
+
+		return () => {
+			window.removeEventListener("message", handleMessage);
+		};
+	}, []);
 
 	// Effect to watch for theme changes
 	useEffect(() => {
@@ -115,6 +145,25 @@ export default function Giscus({ locale }: GiscusProps) {
 		};
 	}, []);
 
-	return <div ref={containerRef} className="mt-8" />;
+	return (
+		<div className="mt-8">
+			{/* Show custom message when no comments and comments section is hidden */}
+			{(commentCount === null || commentCount === 0) && !showComments && (
+				<div className="py-6">
+					<p className="text-base text-gray-700 dark:text-gray-300">
+						{noCommentsMessage}{' '}
+						<button
+							onClick={() => setShowComments(true)}
+							className="inline font-semibold underline decoration-2 underline-offset-4 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+						>
+							{locale === 'he' ? 'התגובה הראשונה' : 'first comment'}
+						</button>
+					</p>
+				</div>
+			)}
+			{/* Always render the container, but hide it when showing the empty state message */}
+			<div ref={containerRef} style={{ display: (!showComments && (commentCount === null || commentCount === 0)) ? 'none' : 'block' }} />
+		</div>
+	);
 }
 

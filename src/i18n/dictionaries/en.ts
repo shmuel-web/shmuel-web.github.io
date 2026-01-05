@@ -72,4 +72,7 @@ export default {
     submit: "Subscribe",
     formAction: "https://api.follow.it/subscription-form/QTBQTWRKU1U2SXJMODgrb0I5N3hPUVVLQlp2U01pemptUE4wM1BDemNEY0FhTU5EV3hkWnV6TzhJWm5TRXA1Um5Gc3VOenQxYnp3T0Z3UTNsc3dVWFkrdVFQNE40QVcxdElEWGNGa3hva0V1VkhpNDBiOUtqSFZxR3k2Nk5HaGV8cVRaMi9RaDkzdUZKa2JObFpYb2hsN0NnNnp0citNMGpsQ2l0b0J4end3VT0=/8",
   },
+  comments: {
+    noCommentsMessage: "Wow! No comments yet, you have the rare opportunity to write the",
+  },
 } as const;

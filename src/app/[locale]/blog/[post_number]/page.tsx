@@ -63,8 +63,12 @@ export default async function BlogPostPage({ params, searchParams }: { params: P
             ) : (
                 <div className="prose dark:prose-invert mt-6" dangerouslySetInnerHTML={{ __html: post.html }} />
             )}
-            <Giscus locale={locale} />
-            <NewsletterSubscribe
+
+			<Giscus 
+              locale={locale}
+              noCommentsMessage={dict.comments.noCommentsMessage}
+            />
+			<NewsletterSubscribe
               locale={locale as Locale}
               heading={dict.newsletter.heading}
               promise={dict.newsletter.promise}
