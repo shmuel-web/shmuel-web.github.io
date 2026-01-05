@@ -21,7 +21,7 @@ export default function NewsletterSubscribe({
 }: NewsletterSubscribeProps) {
   return (
     <div 
-      className="mt-12 pt-8 border-t border-[var(--border-color)]" 
+      className="pt-8" 
       dir={locale === "he" ? "rtl" : "ltr"}
     >
       <div className="max-w-md mx-auto">
