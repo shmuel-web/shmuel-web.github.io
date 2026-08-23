@@ -4,6 +4,7 @@ title: 'Design for Mobile'
 date: '2025-10-07'
 summary: 'Mobile-first layouts and RTL support.'
 tags: ['design','rtl']
+draft: true
 
 ---
 English content for post 3.
