@@ -54,7 +54,7 @@ export default async function LocaleLayout({
     <I18nProvider value={{ locale, dict }}>
       <div className="min-h-screen grid grid-rows-[auto_1fr_auto]" dir={locale === "he" ? "rtl" : "ltr"}>
         <Header />
-        <div>{children}</div>
+        <main className="min-w-0">{children}</main>
         <Footer />
       </div>
     </I18nProvider>

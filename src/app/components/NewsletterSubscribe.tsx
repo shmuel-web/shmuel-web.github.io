@@ -22,10 +22,10 @@ export default function NewsletterSubscribe({
 }: NewsletterSubscribeProps) {
   return (
     <div 
-      className="pt-8" 
+      className="w-full min-w-0 pt-8"
       dir={locale === "he" ? "rtl" : "ltr"}
     >
-      <div className="max-w-md mx-auto">
+      <div className="max-w-md w-full min-w-0 mx-auto">
         <h3 className="text-lg font-semibold text-center mb-4">
           {heading}
         </h3>
@@ -33,19 +33,20 @@ export default function NewsletterSubscribe({
         <form 
           action={formAction} 
           method="post"
-          className="flex flex-col gap-3"
+          className="flex w-full min-w-0 flex-col gap-3"
         >
-          <div className="flex gap-2">
+          <div className="flex min-w-0 flex-col gap-2 sm:flex-row">
             <input
               type="email"
               name="email"
               placeholder={emailPlaceholder}
               required
-              className="flex-1 px-4 py-2 border border-[var(--border-color)] rounded-lg bg-[var(--bg-color)] text-[var(--text-color)] placeholder:opacity-60 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full min-w-0 flex-1 px-4 py-2 border border-[var(--border-color)] rounded-lg bg-[var(--bg-color)] text-[var(--text-color)] placeholder:opacity-60 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <Button
               type="submit"
               variant="solid"
+              className="w-full sm:w-auto"
             >
               {submit}
             </Button>
@@ -59,4 +60,3 @@ export default function NewsletterSubscribe({
     </div>
   );
 }
-
