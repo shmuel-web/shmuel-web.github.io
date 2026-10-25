@@ -3,9 +3,41 @@ import Header from "../components/Header";
 import { I18nProvider } from "@/i18n/I18nProvider";
 import { getDictionary } from "@/i18n/getDictionary";
 import type { Locale } from "@/i18n/locales";
+import type { Metadata } from "next";
 
 export async function generateStaticParams() {
   return [{ locale: "en" }, { locale: "he" }];
+}
+
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ locale: string }> 
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const dict = await getDictionary(locale as Locale);
+  
+  return {
+    alternates: {
+      languages: {
+        'he': '/he/',
+        'en': '/en/',
+        'x-default': '/he/'
+      },
+      types: {
+        'application/rss+xml': [
+          { url: `/rss/${locale}.xml`, title: `RSS Feed (${locale})` }
+        ]
+      }
+    },
+    title: {
+      template: `${dict.siteTitle} | %s`,
+      default: dict.siteTitle
+    },
+    other: {
+      'follow.it-verification-code': locale === 'he' ? 'QRk0xmQAwpLgXNx4Jpqk' : 'HLzxBeb1pv5FYC2hzaZr'
+    }
+  };
 }
 
 export default async function LocaleLayout({
@@ -22,7 +54,7 @@ export default async function LocaleLayout({
     <I18nProvider value={{ locale, dict }}>
       <div className="min-h-screen grid grid-rows-[auto_1fr_auto]" dir={locale === "he" ? "rtl" : "ltr"}>
         <Header />
-        <div>{children}</div>
+        <main className="min-w-0">{children}</main>
         <Footer />
       </div>
     </I18nProvider>

@@ -72,11 +72,172 @@ tags: ["nextjs", "בלוג"]
 - `tags`: Array of tags for categorization
 - `draft`: Set to `true` to exclude from production (optional)
 
-### 4. Content Guidelines
+### 4. Available Tags
+
+Tags should be used consistently across posts. Here is the complete list of available tags:
+
+**Hebrew Tags:**
+- `מדע` - Science
+- `קבלה` - Kabbalah
+- `תורה` - Torah
+- `כלכלה` - Economics
+- `חברה` - Society
+- `תוכנה` - Software
+
+**English Tags:**
+- `Science`
+- `Kabbalah`
+- `Torah`
+- `Economics`
+- `Society`
+- `Software`
+
+**Additional Tags** (used in existing posts):
+- `Between Worlds` / `בין העולמות`
+- `Thinking` / `חשיבה`
+- `Torah, Technology, and Society` / `תורה טכנולוגיה וחברה`
+- `Beginning` / `התחלה`
+- `Reflection` / `הרהור`
+- `Culture & Society` / `תרבות וחברה`
+- `Simplicity` / `פשטות`
+- `Design` / `עיצוב`
+- `RTL`
+- `Redemption` / `גאולה`
+- `Baal Teshuvah` / `חוזרים בתשובה`
+
+### 5. Content Guidelines
 - Use standard Markdown syntax
-- Images should be placed in `public/` directory
 - Both language versions will be automatically linked
 - Posts are sorted by date (newest first)
+
+### 6. Adding Images to a Blog Post
+
+Images can live alongside your post in `content/blog/<post_number>/` and are served at runtime via a built-in route.
+
+1. Place your image next to the Markdown files:
+   - `content/blog/004/my-photo.jpeg`
+2. Reference it in Markdown using an absolute URL rooted at `/content/blog/`:
+   - English:
+     ```markdown
+     ![My photo](/content/blog/004/my-photo.jpeg)
+     ```
+   - Hebrew:
+     ```markdown
+     ![התמונה שלי](/content/blog/004/my-photo.jpeg)
+     ```
+
+Notes:
+- Supported types: jpg, jpeg, png, webp, gif, svg
+- Files are returned with long-term cache headers (`Cache-Control: public, max-age=31536000, immutable`)
+- Prefer reasonably sized, compressed images for faster mobile load times
+
+## Blog Flow - Audio to Post Automation
+
+The blog-flow feature automatically converts voice recordings into bilingual blog posts with audio playback.
+
+### How It Works
+
+1. **Upload Recording**: Create a new post directory and add your recording file named `original_audio.*` (any audio format supported)
+2. **Automatic Processing**: When you commit or merge a PR, GitHub Actions will:
+   - Transcribe the audio using OpenAI Whisper
+   - Generate a Hebrew blog post with title, summary, and tags
+   - Translate to English
+   - Polish both versions (punctuation, paragraphs, formatting)
+   - Generate audio files for both languages
+   - Create posts as **drafts** for your review
+
+### Usage
+
+1. **Create Post Directory** (with auto-incremented number or specific number):
+   ```bash
+   mkdir content/blog/004
+   # or let it auto-increment by using any name
+   ```
+
+2. **Add Your Recording**:
+   ```bash
+   # Place your recording in the post directory
+   # File must be named: original_audio.*
+   cp ~/my-recording.mp3 content/blog/004/original_audio.mp3
+   ```
+
+3. **Commit and Push**:
+   ```bash
+   git add content/blog/004/
+   git commit -m "feat: add audio recording for new post"
+   git push
+   ```
+
+4. **Review Generated Post**:
+   - The workflow will create `he.md` and `en.md` files
+   - Both posts start as **drafts** (`draft: true` in frontmatter)
+   - Review the content, make any edits needed
+   - When ready to publish, remove `draft: true` from both files
+
+5. **Publish**:
+   ```bash
+   # Edit he.md and en.md to remove draft: true
+   git add content/blog/004/
+   git commit -m "publish: post 004"
+   git push
+   ```
+
+### Requirements
+
+- **GitHub Secrets**: `OPENAI_API_KEY` must be set in your repository secrets
+- **File Naming**: Recording must be named `original_audio.*` (extension can be any audio format)
+- **Post Directory**: Can be auto-numbered or use a specific number (e.g., `004`)
+
+### Generated Files
+
+After processing, the post directory will contain:
+- `he.md` - Hebrew blog post (draft)
+- `en.md` - English blog post (draft)
+- `listen-he.opus` - Hebrew audio file
+- `listen-en.opus` - English audio file
+- `original_audio.*` - Your original recording (preserved)
+
+### Manual Processing
+
+You can also run the script manually for testing:
+
+```bash
+node scripts/blog-flow/index.js content/blog/004
+```
+
+### Notes
+
+- Posts are automatically created as **drafts** - you must manually remove `draft: true` to publish
+- The workflow triggers on push or PR merge when `original_audio.*` files are detected
+- Post numbers are auto-incremented if directory name is not numeric
+- Audio transcription assumes Hebrew input (can be adjusted in script)
+
+## Git Hooks
+
+### Pre-commit: En-dash/Em-dash checker
+
+This repo runs `node scripts/check-em-dash.js` on `pre-commit` to ensure punctuation is consistent in content files.
+
+Setup (first time after cloning or after dependency changes):
+
+```bash
+npm install
+# simple-git-hooks runs during "prepare" and installs the git hooks
+```
+
+What it runs:
+
+```json
+"simple-git-hooks": {
+  "pre-commit": "npm run check:emdash"
+}
+```
+
+If the check fails, fix issues with:
+
+```bash
+npm run fix:emdash
+```
 
 ## Learn More
 
@@ -136,3 +297,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 3. Add your custom domain
 4. Configure DNS records as instructed by Vercel
 # Trigger deployment
+
+Triggered deploy: 2025-10-20T08:26:20Z

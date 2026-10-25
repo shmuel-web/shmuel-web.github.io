@@ -1,0 +1,78 @@
+name: Blog Flow - Audio to Post
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/blog/**/original_audio.*'
+  pull_request:
+    types: [closed]
+    paths:
+      - 'content/blog/**/original_audio.*'
+
+jobs:
+  process-audio:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true || github.event_name == 'push'
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Find new post directories
+        id: find-posts
+        run: |
+          # Find directories with original_audio files
+          POST_DIRS=$(find content/blog -type f -name "original_audio.*" -exec dirname {} \; | sort -u)
+          
+          if [ -z "$POST_DIRS" ]; then
+            echo "No new posts found"
+            echo "post_dirs=" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          echo "Found post directories:"
+          echo "$POST_DIRS"
+          echo "post_dirs<<EOF" >> $GITHUB_OUTPUT
+          echo "$POST_DIRS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Process blog posts
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -z "${{ steps.find-posts.outputs.post_dirs }}" ]; then
+            echo "No posts to process"
+            exit 0
+          fi
+          
+          echo "${{ steps.find-posts.outputs.post_dirs }}" | while read -r post_dir; do
+            echo "Processing: $post_dir"
+            node scripts/blog-flow/index.js "$post_dir"
+          done
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          if [ -n "$(git status --porcelain)" ]; then
+            git add content/blog/
+            git commit -m "chore: auto-generate blog post from audio [skip ci]"
+            git push
+          else
+            echo "No changes to commit"
+          fi
+
