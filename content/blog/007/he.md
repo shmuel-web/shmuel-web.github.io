@@ -8,6 +8,10 @@ tags: ['חברה', 'ישראל', 'דמוקרטיה']
 
 הסיפור של טיסת פליי דובאי לא יוצא לכולנו מהראש.
 
+![מטוס Flydubai נוחת בנמל התעופה של דאקה](/content/blog/007/flydubai-landing.jpg)
+
+*צילום: [Faisal Akram](https://commons.wikimedia.org/wiki/File:Flydubai_Boeing_737-800_A6-FDK_Lands_at_Dhaka_Airport_%28DAC-VGZR%29_%287515759212%29.jpg), מתוך Wikimedia Commons, ברישיון [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/). התמונה הוקטנה לצורכי תצוגה.*
+
 קשה שלא לראות בו משל למדינת ישראל.
 
 בתא הטייס שלנו מתנהלת מלחמה. כל צד בטוח שהצד השני רוצה לרסק את המטוס. כל צד מרגיש את הסכין של האחר בגב שלו. בעיניו, הוא לא נאבק ביריב פוליטי. הוא נאבק במחבל.
