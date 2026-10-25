@@ -52,7 +52,7 @@ export default async function BlogPostPage({ params, searchParams }: { params: P
   const dict = await getDictionary(locale as Locale);
   if (!post) notFound();
   return (
-        <article className="max-w-screen-sm mx-auto w-full px-4 sm:px-6 md:px-8 py-8" dir={locale === "he" ? "rtl" : "ltr"}>
+        <article className="max-w-screen-sm max-w-full mx-auto w-full min-w-0 px-4 sm:px-6 md:px-8 py-8" dir={locale === "he" ? "rtl" : "ltr"}>
             <h1 className="text-2xl sm:text-3xl font-bold">{post.frontmatter.title}</h1>
             <p className="text-xs sm:text-sm opacity-70 mt-2">
                 {new Date(post.frontmatter.date).toLocaleDateString(locale)}
@@ -79,6 +79,5 @@ export default async function BlogPostPage({ params, searchParams }: { params: P
         </article>
     );
 }
-
 
 
