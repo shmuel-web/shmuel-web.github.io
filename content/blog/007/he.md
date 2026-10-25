@@ -10,7 +10,7 @@ tags: ['חברה', 'ישראל', 'דמוקרטיה']
 
 ![מטוס Flydubai נוחת בנמל התעופה של דאקה](/content/blog/007/flydubai-landing.jpg)
 
-*צילום: [Faisal Akram](https://commons.wikimedia.org/wiki/File:Flydubai_Boeing_737-800_A6-FDK_Lands_at_Dhaka_Airport_%28DAC-VGZR%29_%287515759212%29.jpg), מתוך Wikimedia Commons, ברישיון [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/). התמונה הוקטנה לצורכי תצוגה.*
+*צילום: [Faisal Akram, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Flydubai_Boeing_737-800_A6-FDK_Lands_at_Dhaka_Airport_%28DAC-VGZR%29_%287515759212%29.jpg) · [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) · הוקטן לתצוגה*
 
 קשה שלא לראות בו משל למדינת ישראל.
 
